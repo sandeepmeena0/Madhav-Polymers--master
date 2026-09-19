@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Madhav Polymers</title>
+  <meta name="description"
+    content="Get in touch with Madhav Polymers for quotes, samples, or spec sheets on our polymer sealing solutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Button group styling for side-by-side action buttons */
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn-email {
+      background: var(--navy-900, #0B2258);
+      color: #ffffff;
+    }
+
+    .btn-email:hover {
+      background: var(--navy-800, #123072);
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="header-placeholder">
+    <header>
+      <div class="nav-wrap">
+        <a href="index.html" class="brand">
+          <img src="assets/madhav-logo-full.png" alt="Madhav Polymers emblem">
+          <span class="brand-text">
+            <span class="name">Madhav Polymers</span><br>
+            <span class="tag">ADVANCED POLYMER &amp; LASTING TRUST</span>
+          </span>
+        </a>
+
+        <nav class="main-nav">
+          <ul>
+            <li data-page="index.html"><a href="index.html">Home</a></li>
+            <li data-page="about.html"><a href="about.html">About Us</a></li>
+            <li class="has-dropdown" data-page="products.html">
+              <a href="products.html">Products <span class="caret">▾</span></a>
+              <ul class="dropdown">
+                <li class="has-submenu">
+                  <a href="products.html">Rubber Gasket <span class="caret-right">▸</span></a>
+                  <ul class="submenu">
+                    <li><a href="hand-railing-rubber-gasket.html">Hand Railing Rubber Gasket</a></li>
+                    <li><a href="kitchen-and-wardrobe-profiles-rubber-gasket.html">Kitchen And Wardrobe Profiles Rubber Gasket</a></li>
+                    <li><a href="office-partition-system-rubber-gasket.html">Office Partition System Rubber Gasket</a></li>
+                    <li><a href="upvc-window-rubber-gasket.html">Upvc Window Rubber Gasket</a></li>
+                    <li><a href="aluminum-window-rubber-gasket.html">Aluminum Window Rubber Gasket</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li data-page="custom-solution.html"><a href="custom-solution.html">Custom Solution</a></li>
+            <li data-page="quality.html"><a href="quality.html">Quality</a></li>
+            <li data-page="contact.html" class="active"><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <form id="navSearchForm" class="nav-search" action="search.html" method="GET">
+            <input id="navSearchInput" type="text" name="q" class="nav-search__input" placeholder="Search..." required />
+            <button type="submit" class="nav-search__icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path
+                  d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+              </svg>
+            </button>
+          </form>
+        </div>
+        <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </header>
+  </div>
+
+  <section class="page-hero">
+    <!-- Background Image -->
+    <img class="hero-video"
+      src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop"
+      alt="Modern Glass Building Architecture" />
+
+    <!-- Overlay for Text Legibility -->
+    <div class="hero-overlay"></div>
+
+    <!-- Hero Content Wrap -->
+    <div class="wrap">
+      <span class="kicker">Get in touch</span>
+      <h1>Let's discuss your project</h1>
+      <p class="lede">
+        Reach out for a sample, a spec sheet, or a competitive quote — our team typically replies within one business
+        day.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <h2>Reach us directly</h2>
+        <p class="lede">Prefer to call or email? Here's how to find us.</p>
+
+        <div class="info-row">
+          <div class="label">OFFICE ADDRESS</div>
+          <div class="val">Third Floor I 25 Honour Homes Sector 89,
+            <br> Faridabad, Haryana , India
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="label">PHONE</div>
+          <div class="val">+91 93557 61001</div>
+        </div>
+        <div class="info-row">
+          <div class="label">EMAIL</div>
+          <div class="val">info@madhavpolymers.in</div>
+        </div>
+      </div>
+
+      <form id="inquiryForm">
+        <div class="row-2">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" type="text" placeholder="Full name" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone (optional)</label>
+            <input id="phone" type="tel" placeholder="+91 00000 00000">
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" type="email" placeholder="you@company.com" required>
+        </div>
+        <div class="field">
+          <label for="product">Product of interest</label>
+          <select id="product">
+            <option value="">Select a product (optional)</option>
+            <option>Weatherstrip</option>
+            <option>Rubber Gasket</option>
+            <option>PVC Seals &amp; Profiles</option>
+            <option>Door Seals</option>
+            <option>Auto Drop Down Seal</option>
+            <option>Custom Solution</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Project details</label>
+          <textarea id="message" placeholder="Tell us what you're looking for..."></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" id="btnWhatsApp" class="btn btn-gold">Send via WhatsApp</button>
+          <button type="button" id="btnEmail" class="btn btn-email">Send via Email</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="map-frame">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=77.2000%2C28.3200%2C77.4000%2C28.4800&amp;layer=mapnik&amp;marker=28.4089%2C77.3178"
+        loading="lazy" title="Map showing Faridabad, Haryana.">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Shared footer is injected here by js/include.js -->
+  <div id="footer-placeholder"></div>
+
+  <script>
+    const form = document.getElementById('inquiryForm');
+    const whatsappNumber = "919449303946";
+    const recipientEmail = "info@madhavpolymers.in";
+
+    function getFormData() {
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return null;
+      }
+      return {
+        name: document.getElementById('name').value.trim(),
+        phone: document.getElementById('phone').value.trim() || 'Not provided',
+        email: document.getElementById('email').value.trim(),
+        product: document.getElementById('product').value || 'Not specified',
+        details: document.getElementById('message').value.trim() || 'No additional details'
+      };
+    }
+
+    // WhatsApp Action
+    document.getElementById('btnWhatsApp').addEventListener('click', function () {
+      const data = getFormData();
+      if (!data) return;
+
+      const formattedMessage =
+        `*New Inquiry Received*\n\n` +
+        `*Name:* ${data.name}\n` +
+        `*Phone:* ${data.phone}\n` +
+        `*Email:* ${data.email}\n` +
+        `*Product:* ${data.product}\n` +
+        `*Details:* ${data.details}`;
+
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(formattedMessage)}`;
+      window.open(whatsappUrl, '_blank');
+    });
+
+    // Email Action (Direct client mailto link)
+    document.getElementById('btnEmail').addEventListener('click', function () {
+      const data = getFormData();
+      if (!data) return;
+
+      const subject = `New Inquiry from ${data.name} - ${data.product}`;
+      const body =
+        `New Inquiry Details:\n\n` +
+        `Name: ${data.name}\n` +
+        `Phone: ${data.phone}\n` +
+        `Email: ${data.email}\n` +
+        `Product of Interest: ${data.product}\n\n` +
+        `Project Details:\n${data.details}`;
+
+      const mailtoUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+    });
+  </script>
+  <script src="js/main.js"></script>
+  <script src="./include.js"></script>
+</body>
+
+</html>

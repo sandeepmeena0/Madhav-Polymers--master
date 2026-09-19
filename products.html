@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Madhav Polymers</title>
+<meta name="description" content="Browse Madhav Polymers' five core families of sealing solutions: weatherstrip, rubber gasket, PVC seals & profiles, door seals and auto drop down seals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="header-placeholder">
+  <header>
+    <div class="nav-wrap">
+      <a href="index.html" class="brand">
+        <img src="assets/madhav-logo-full.png" alt="Madhav Polymers emblem">
+        <span class="brand-text">
+          <span class="name">Madhav Polymers</span><br>
+          <span class="tag">ADVANCED POLYMER &amp; LASTING TRUST</span>
+        </span>
+      </a>
+
+      <nav class="main-nav">
+        <ul>
+          <li data-page="index.html"><a href="index.html">Home</a></li>
+          <li data-page="about.html"><a href="about.html">About Us</a></li>
+          <li class="has-dropdown active" data-page="products.html">
+            <a href="products.html">Products <span class="caret">▾</span></a>
+            <ul class="dropdown">
+              <li class="has-submenu">
+                <a href="products.html">Rubber Gasket <span class="caret-right">▸</span></a>
+                <ul class="submenu">
+                  <li><a href="hand-railing-rubber-gasket.html">Hand Railing Rubber Gasket</a></li>
+                  <li><a href="kitchen-and-wardrobe-profiles-rubber-gasket.html">Kitchen And Wardrobe Profiles Rubber Gasket</a></li>
+                  <li><a href="office-partition-system-rubber-gasket.html">Office Partition System Rubber Gasket</a></li>
+                  <li><a href="upvc-window-rubber-gasket.html">Upvc Window Rubber Gasket</a></li>
+                  <li><a href="aluminum-window-rubber-gasket.html">Aluminum Window Rubber Gasket</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li data-page="custom-solution.html"><a href="custom-solution.html">Custom Solution</a></li>
+          <li data-page="quality.html"><a href="quality.html">Quality</a></li>
+          <li data-page="contact.html"><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <form id="navSearchForm" class="nav-search" action="search.html" method="GET">
+          <input id="navSearchInput" type="text" name="q" class="nav-search__input" placeholder="Search..." required />
+          <button type="submit" class="nav-search__icon-btn" aria-label="Search">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 14z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+      <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+</div>
+
+
+
+<section class="page-hero">
+  <!-- Background Image -->
+  <img class="hero-video" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&auto=format&fit=crop" alt="Modern Architectural Glass Window" />
+
+  <!-- Overlay for Text Legibility -->
+  <div class="hero-overlay"></div>
+
+  <!-- Hero Content Wrap -->
+  <div class="wrap">
+    <h1>Sealing solutions for every application</h1>
+    <p class="lede">Five core product families, each engineered, extruded, and finished in-house with a focus on quality and consistency.</p>
+  </div>
+</section>
+
+<!-- <section class="products">
+  <div class="wrap">
+    <div class="product-grid">
+
+      <a class="product-card" href="product-weatherstrip.html">
+        <svg class="icon" viewBox="0 0 48 48"><path d="M4 24c4-10 8-10 12 0s8 10 12 0 8-10 12 0 8 10 4 10" stroke="#F2A71B" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+        <h3>Weatherstrip</h3>
+        <p>Siliconized and non-siliconized weatherstrips that keep doors and windows draft- and dust-free.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="product-rubber-gasket.html">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" stroke="#1B3E8C" stroke-width="2.4" fill="none"/><circle cx="24" cy="24" r="8" stroke="#F2A71B" stroke-width="2.4" fill="none"/></svg>
+        <h3>Rubber gasket</h3>
+        <p>Wedge, cord and shutter gaskets for windows, partitions and hand railing systems.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="product-pvc-seals-profiles.html">
+        <svg class="icon" viewBox="0 0 48 48"><rect x="6" y="10" width="9" height="28" rx="1.5" stroke="#F2A71B" stroke-width="2.2" fill="none"/><rect x="19.5" y="10" width="9" height="28" rx="1.5" stroke="#1B3E8C" stroke-width="2.2" fill="none"/><rect x="33" y="10" width="9" height="28" rx="1.5" stroke="#F2A71B" stroke-width="2.2" fill="none"/></svg>
+        <h3>PVC seals &amp; profiles</h3>
+        <p>Profile seals for kitchen, wardrobe, office partition and glass shower applications.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="product-door-seals.html">
+        <svg class="icon" viewBox="0 0 48 48"><rect x="10" y="6" width="20" height="36" rx="1" stroke="#1B3E8C" stroke-width="2.2" fill="none"/><circle cx="26" cy="24" r="1.6" fill="#F2A71B"/></svg>
+        <h3>Door seals</h3>
+        <p>Bottom seals and glass door seals engineered for a tight, quiet close.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="product-auto-drop-down-seal.html">
+        <svg class="icon" viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="8" rx="1.5" stroke="#F2A71B" stroke-width="2.2" fill="none"/><path d="M24 20v14m0 0l-6-6m6 6l6-6" stroke="#1B3E8C" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Auto drop down seal</h3>
+        <p>Concealed and external drop-down seals that activate automatically on door closure.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="custom-solution.html">
+        <svg class="icon" viewBox="0 0 48 48"><path d="M24 6l4 8 9 1-6.5 6.5L32 30l-8-4.5L16 30l1.5-8.5L11 15l9-1z" stroke="#F2A71B" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+        <h3>Custom solution</h3>
+        <p>Don't see the exact profile you need? We engineer bespoke seals to your drawing or sample.</p>
+        <span class="view">Start a project</span>
+      </a>
+
+    </div>
+  </div>
+</section> -->
+
+<section class="products">
+  <div class="wrap">
+    <div class="product-grid">
+
+      <a class="product-card" href="wedge-and-cord-rubber-gasket.html">
+          <svg class="icon" viewBox="0 0 48 48"><path d="M4 24c4-10 8-10 12 0s8 10 12 0 8-10 12 0 8 10 4 10" stroke="#F2A71B" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+        <h3>Wedge And Cord Rubber Gasket</h3>
+        <p>High-tensile wedge and cord profiles designed for secure window sealing and structural stability.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="hand-railing-rubber-gasket.html">
+         <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" stroke="#1B3E8C" stroke-width="2.4" fill="none"/><circle cx="24" cy="24" r="8" stroke="#F2A71B" stroke-width="2.4" fill="none"/></svg>
+        <h3>Hand Railing Rubber Gasket</h3>
+        <p>Durable rubber gaskets providing firm cushioning and tight fitting for glass handrail systems.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="kitchen-and-wardrobe-profiles-rubber-gasket.html">
+<svg class="icon" viewBox="0 0 48 48"><rect x="10" y="6" width="20" height="36" rx="1" stroke="#1B3E8C" stroke-width="2.2" fill="none"/><circle cx="26" cy="24" r="1.6" fill="#F2A71B"/></svg>
+        <h3>Kitchen And Wardrobe Profiles Rubber Gasket</h3>
+        <p>Precision-molded gaskets engineered to protect modern kitchen cabinets and wardrobe doors.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="office-partition-system-rubber-gasket.html">
+        <svg class="icon" viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="8" rx="1.5" stroke="#F2A71B" stroke-width="2.2" fill="none"/><path d="M24 20v14m0 0l-6-6m6 6l6-6" stroke="#1B3E8C" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Auto drop down seal</h3>
+        <h3>Office Partition System Rubber Gasket</h3>
+        <p>Acoustic and dampening rubber gaskets optimized for commercial glass office partition walls.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="upvc-window-rubber-gasket.html">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" stroke="#1B3E8C" stroke-width="2.4" fill="none"/><circle cx="24" cy="24" r="8" stroke="#F2A71B" stroke-width="2.4" fill="none"/></svg>
+        <h3>Upvc Window Rubber Gasket</h3>
+        <p>Weather-resistant rubber gaskets tailored specifically for uPVC window frames and sash channels.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="aluminum-window-rubber-gasket.html">
+        <svg class="icon" viewBox="0 0 48 48"><path d="M24 6l4 8 9 1-6.5 6.5L32 30l-8-4.5L16 30l1.5-8.5L11 15l9-1z" stroke="#F2A71B" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+        <h3>Aluminum Window Rubber Gasket</h3>
+        <p>Heavy-duty sealing gaskets designed for seamless integration with architectural aluminum window frames.</p>
+        <span class="view">View range</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Need help choosing a profile?</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto;">Send us your application details and our team will recommend the right seal and material for it.</p>
+    <div class="btns">
+      <a href="contact.html" class="btn btn-gold">Talk to Our Team</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Shared footer is injected here by js/include.js -->
+<div id="footer-placeholder"></div>
+
+<script src="js/main.js"></script>
+<script src="./include.js"></script>
+</body>
+</html>

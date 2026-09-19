@@ -1,0 +1,162 @@
+/* ---------- Header search box (replaces the old "Get a Quote" nav button) ---------- */
+.nav-search{
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.35);
+  border-radius:999px;
+  padding:0.35rem 0.5rem 0.35rem 0.9rem;
+  transition:background .25s ease, border-color .25s ease, width .25s ease;
+}
+.nav-search__icon-btn{
+  background:none;
+  border:none;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:inherit;
+  cursor:pointer;
+  order:2;
+}
+.nav-search__input{
+  border:none;
+  background:none;
+  outline:none;
+  color:inherit;
+  font-family:var(--sans);
+  font-size:0.9rem;
+  width:120px;
+  transition:width .25s ease;
+}
+.nav-search__input::placeholder{
+  color:rgba(255,255,255,0.65);
+}
+.nav-search:focus-within{
+  background:rgba(255,255,255,0.18);
+  border-color:rgba(255,255,255,0.6);
+}
+.nav-search:focus-within .nav-search__input{
+  width:200px;
+}
+
+/* Header is white/scrolled state: darker text + border for contrast */
+header.scrolled .nav-search{
+  background:var(--cream-50);
+  border-color:var(--line);
+  color:var(--navy-900);
+}
+header.scrolled .nav-search__input::placeholder{
+  color:#7A84A6;
+}
+
+@media (max-width:680px){
+  .nav-cta {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+  .nav-search{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+    width: 38px;
+    height: 38px;
+    transition: none;
+  }
+  .nav-search__icon-btn{
+    width: 38px;
+    height: 38px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  header.scrolled .nav-search__icon-btn{
+    background: var(--cream-50);
+    border-color: var(--line);
+    color: var(--navy-900);
+  }
+  .nav-search__input{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 38px;
+    width: 38px;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(11, 26, 52, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    z-index: 2;
+    outline: none;
+    box-sizing: border-box;
+    transition: width .3s cubic-bezier(0.16, 1, 0.3, 1), opacity .2s ease, padding .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .nav-search__input::placeholder{
+    color: rgba(255,255,255,0.65);
+  }
+  .nav-search:focus-within,
+  .nav-search.search-open{
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  .nav-search:focus-within .nav-search__input,
+  .nav-search.search-open .nav-search__input{
+    width: 175px;
+    max-width: calc(100vw - 195px);
+    opacity: 1;
+    pointer-events: auto;
+    padding: 0 42px 0 14px;
+    border-color: var(--gold-500);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+  .nav-search:focus-within .nav-search__icon-btn,
+  .nav-search.search-open .nav-search__icon-btn{
+    background: transparent;
+    border-color: transparent;
+    color: var(--gold-500);
+  }
+  header.scrolled .nav-search__input{
+    background: #ffffff;
+    border-color: var(--line);
+    color: var(--navy-900);
+  }
+  header.scrolled .nav-search__input::placeholder{
+    color: #7A84A6;
+  }
+  header.scrolled .nav-search:focus-within .nav-search__input,
+  header.scrolled .nav-search.search-open .nav-search__input{
+    border-color: var(--gold-500);
+    box-shadow: 0 4px 20px rgba(11, 34, 88, 0.15);
+  }
+  header.scrolled .nav-search:focus-within .nav-search__icon-btn,
+  header.scrolled .nav-search.search-open .nav-search__icon-btn{
+    background: transparent;
+    border-color: transparent;
+    color: var(--gold-500);
+  }
+}
+

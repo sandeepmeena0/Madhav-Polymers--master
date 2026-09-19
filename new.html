@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* Hero Slider Container */
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  min-height: 500px;
+  max-height: 800px;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Individual Slide */
+.hero-slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.hero-slider .slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Semi-transparent dark overlay matching screenshots */
+.slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Content Container (Left-aligned) */
+.slide-content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+  margin-left: 8%;
+  padding: 0 20px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.slide-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.slide-description {
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 540px;
+}
+
+/* Teal Button Styling */
+.btn-teal {
+  display: inline-block;
+  background-color: #008060; /* Matching green-teal tone */
+  color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-teal:hover {
+  background-color: #00664d;
+  transform: translateY(-2px);
+}
+
+/* Circular Navigation Buttons */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #008060;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.slider-nav svg {
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
+}
+
+.slider-nav:hover {
+  background-color: #00664d;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .slide-content {
+    margin-left: 5%;
+    max-width: 90%;
+  }
+  .slide-title {
+    font-size: 2rem;
+  }
+  .slide-description {
+    font-size: 0.95rem;
+  }
+  .slider-nav {
+    width: 36px;
+    height: 36px;
+  }
+}
+</style>
+<body>
+  
+  <section class="hero-slider">
+  <!-- Slides Container -->
+  <div class="slider-wrapper">
+    <!-- Slide 1 -->
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h1 class="slide-title">Benchmark in Gaskets &amp; Seals</h1>
+        <p class="slide-description">Crafting high-quality sealing solutions for diverse industries with innovation and precision.</p>
+        <a href="contact.html" class="btn-teal">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h1 class="slide-title">Sustainability Meets Performance</h1>
+        <p class="slide-description">Our gaskets ensure superior performance while contributing to environmental responsibility.</p>
+        <a href="sustainability.html" class="btn-teal">Sustainability</a>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h1 class="slide-title">Your Trusted Manufacturing Partner</h1>
+        <p class="slide-description">Delivering reliability, innovation, and excellence in gasket manufacturing since our inception.</p>
+        <a href="products.html" class="btn-teal">Product</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button class="slider-nav prev-btn" aria-label="Previous Slide">
+    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+  </button>
+  <button class="slider-nav next-btn" aria-label="Next Slide">
+    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+  </button>
+</section>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".hero-slider .slide");
+  const prevBtn = document.querySelector(".hero-slider .prev-btn");
+  const nextBtn = document.querySelector(".hero-slider .next-btn");
+
+  let currentIndex = 0;
+  const slideInterval = 6000; // 6 seconds per slide
+  let timer;
+
+  function showSlide(index) {
+    if (index >= slides.length) currentIndex = 0;
+    else if (index < 0) currentIndex = slides.length - 1;
+    else currentIndex = index;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === currentIndex);
+    });
+  }
+
+  function nextSlide() {
+    showSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentIndex - 1);
+  }
+
+  function startTimer() {
+    timer = setInterval(nextSlide, slideInterval);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    startTimer();
+  }
+
+  // Button Listeners
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    resetTimer();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+    resetTimer();
+  });
+
+  // Start autoplay
+  startTimer();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+/* ==========================================
+   ABOUT US PAGE STYLES
+   Consistent with the brand aesthetic across the site
+========================================== */
+
+/* ---------- About Page Hero Animations & Layout ---------- */
+@keyframes heroFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-hero-about {
+    padding: 7rem 0 4.5rem;
+}
+
+.page-hero-about .page-hero-logo {
+    max-width: 170px;
+    margin: 1rem auto 1.5rem auto;
+    display: block;
+    opacity: 0;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.page-hero-about .hero-kicker {
+    display: inline-block;
+    color: var(--yellow-500, #fbc02d);
+    font-family: var(--sans, 'Inter', sans-serif);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    font-size: 0.82rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.page-hero-about h1 {
+    color: #ffffff;
+    font-size: clamp(2.2rem, 1.8rem + 2vw, 3.4rem);
+    max-width: 100%;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.015em;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+.page-hero-about p.lede {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: clamp(1rem, 0.96rem + 0.4vw, 1.15rem);
+    line-height: 1.7;
+    max-width: 760px;
+    margin: 0 auto;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+/* By default (Desktop), hide mobile text */
+body .mobile-text {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .page-hero-about {
+        padding: 5.5rem 0 3rem;
+    }
+
+    .page-hero-about .page-hero-logo {
+        max-width: 140px;
+        margin-bottom: 1.2rem;
+    }
+
+    .page-hero-about .hero-kicker {
+        font-size: 0.75rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    body .desktop-text {
+        display: none;
+    }
+    body .mobile-text {
+        display: block;
+    }
+}
+
+/* ---------- About / Capabilities Section ---------- */
+.about {
+    background: var(--cream-50, #FBF8F2);
+}
+
+.about-head {
+    max-width: 56ch;
+    margin-bottom: 3.2rem;
+}
+
+.capabilities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+}
+
+.cap {
+    padding: 0 2.2rem;
+    border-left: 1px solid rgba(11, 34, 88, 0.16);
+}
+
+.cap:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+.cap .mark {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--gold-500, #F2A71B);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.1rem;
+    color: var(--gold-600, #D98A0A);
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    background: rgba(242, 167, 27, 0.08);
+}
+
+.cap h3 {
+    color: var(--navy-900, #0B2258);
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+}
+
+.cap p {
+    color: #4A5578;
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .capabilities {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .cap {
+        border-left: none;
+        padding: 0;
+        border-bottom: 1px solid rgba(11, 34, 88, 0.12);
+        padding-bottom: 1.8rem;
+    }
+
+    .cap:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
+
+/* ---------- Timeline Section ---------- */
+.timeline {
+    background: var(--white, #FFFFFF);
+    padding: 5rem 0;
+}
+
+.timeline .kicker {
+    color: var(--gold-600, #D98A0A);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.timeline h2 {
+    color: var(--navy-900, #0B2258);
+    font-size: clamp(2rem, 1.6rem + 1.4vw, 2.7rem);
+    margin-bottom: 2rem;
+}
+
+.timeline-list {
+    position: relative;
+    margin-top: 3rem;
+    padding-left: 2.2rem;
+    border-left: 1.5px solid var(--gold-500, #F2A71B);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2.6rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.28rem;
+    top: 0.35rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--navy-900, #0B2258);
+    border: 2px solid var(--gold-500, #F2A71B);
+}
+
+.timeline-item .yr {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--gold-600, #D98A0A);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.timeline-item h3 {
+    margin: 0.3rem 0 0.4rem;
+    color: var(--navy-900, #0B2258);
+    font-size: 1.2rem;
+}
+
+.timeline-item p {
+    color: #4A5578;
+    font-size: 0.95rem;
+    max-width: 60ch;
+    line-height: 1.6;
+}

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madhav Polymers — Advanced Polymer &amp; Lasting Trust</title>
+<meta name="description" content="Madhav Polymers manufactures precision rubber, PVC and weatherstrip sealing solutions engineered for durability and lasting trust.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts for Serif & Sans-Serif fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/search.css">
+<style>
+   /* Hero Slider Container */
+.hero-slider {
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  max-height: 800px;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Individual Slide */
+.hero-slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.hero-slider .slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Semi-transparent dark overlay matching screenshots */
+.slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Content Container (Left-aligned) */
+.slide-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin-left: 8%;
+  padding: 0 20px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.slide-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.slide-description {
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 28px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 540px;
+}
+
+/* Teal Button Styling */
+.btn-teal {
+  display: inline-block;
+  background-color: #f3c300; /* Matching green-teal tone */
+  color: #05031c;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-teal:hover {
+  background-color: #f3a600;
+  transform: translateY(-2px);
+}
+
+/* Circular Navigation Buttons */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+   background-color:transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.slider-nav svg {
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
+}
+
+.slider-nav:hover {
+  background-color: #f8c50b;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .slide-content {
+    margin-left: 5%;
+    max-width: 90%;
+  }
+  .slide-title {
+    font-size: 2rem;
+  }
+  .slide-description {
+    font-size: 0.95rem;
+  }
+  .slider-nav {
+    width: 36px;
+    height: 36px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="header-placeholder">
+  <header>
+    <div class="nav-wrap">
+      <a href="index.html" class="brand">
+        <img src="assets/madhav-logo-full.png" alt="Madhav Polymers emblem">
+        <span class="brand-text">
+          <span class="name">Madhav Polymers</span><br>
+          <span class="tag">ADVANCED POLYMER &amp; LASTING TRUST</span>
+        </span>
+      </a>
+
+      <nav class="main-nav">
+        <ul>
+          <li data-page="index.html" class="active"><a href="index.html">Home</a></li>
+          <li data-page="about.html"><a href="about.html">About Us</a></li>
+          <li class="has-dropdown" data-page="products.html">
+            <a href="products.html">Products <span class="caret">▾</span></a>
+            <ul class="dropdown">
+              <li class="has-submenu">
+                <a href="products.html">Rubber Gasket <span class="caret-right">▸</span></a>
+                <ul class="submenu">
+                  <li><a href="hand-railing-rubber-gasket.html">Hand Railing Rubber Gasket</a></li>
+                  <li><a href="kitchen-and-wardrobe-profiles-rubber-gasket.html">Kitchen And Wardrobe Profiles Rubber Gasket</a></li>
+                  <li><a href="office-partition-system-rubber-gasket.html">Office Partition System Rubber Gasket</a></li>
+                  <li><a href="upvc-window-rubber-gasket.html">Upvc Window Rubber Gasket</a></li>
+                  <li><a href="aluminum-window-rubber-gasket.html">Aluminum Window Rubber Gasket</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li data-page="custom-solution.html"><a href="custom-solution.html">Custom Solution</a></li>
+          <li data-page="quality.html"><a href="quality.html">Quality</a></li>
+          <li data-page="contact.html"><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <form id="navSearchForm" class="nav-search" action="search.html" method="GET">
+          <input id="navSearchInput" type="text" name="q" class="nav-search__input" placeholder="Search..." required />
+          <button type="submit" class="nav-search__icon-btn" aria-label="Search">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+      <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+</div>
+
+  <section class="hero-slider">
+  <!-- Slides Container -->
+  <div class="slider-wrapper">
+    <!-- Slide 1 -->
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h1 class="slide-title">Benchmark in Gaskets &amp; Seals</h1>
+        <p class="slide-description">Crafting high-quality sealing solutions for diverse industries with innovation and precision.</p>
+        <a href="contact.html" class="btn-teal">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h1 class="slide-title">Sustainability Meets Performance</h1>
+        <p class="slide-description">Our gaskets ensure superior performance while contributing to environmental responsibility.</p>
+        <a href="sustainability.html" class="btn-teal">Sustainability</a>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h1 class="slide-title">Your Trusted Manufacturing Partner</h1>
+        <p class="slide-description">Delivering reliability, innovation, and excellence in gasket manufacturing since our inception.</p>
+        <a href="products.html" class="btn-teal">Product</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button class="slider-nav prev-btn" aria-label="Previous Slide">
+    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+  </button>
+  <button class="slider-nav next-btn" aria-label="Next Slide">
+    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+  </button>
+</section>
+
+<!-- <section class="stats">
+  <div class="wrap">
+    <div class="stat"><div class="num">20+</div><div class="label">Years of manufacturing</div></div>
+    <div class="stat"><div class="num">ISO</div><div class="label">9001:2015 certified</div></div>
+    <div class="stat"><div class="num">500+</div><div class="label">Clients nationwide</div></div>
+    <div class="stat"><div class="num">Pan-India</div><div class="label">Delivery &amp; support</div></div>
+  </div>
+</section> -->
+
+
+<section class="mp-about-section" id="mpAboutSection">
+  <div class="mp-about-container">
+
+    <!-- LEFT COLUMN: Image slides from Left -->
+    <div class="mp-about-image-wrapper mp-animate-left">
+      <img
+        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop"
+        alt="Manufacturing Excellence Factory Machine"
+      />
+    </div>
+
+    <!-- RIGHT COLUMN: Text content slides from Right -->
+    <div class="mp-about-content mp-animate-right">
+      <h2 class="mp-about-heading">
+        25 Years of<br>
+        Manufacturing<br>
+        Excellence
+      </h2>
+
+      <p class="mp-about-paragraph">
+        Sunmark Industries has been a pioneer in delivering quality components. Our state-of-the-art facility in Rajkot is equipped with the latest CNC technology.
+      </p>
+
+      <p class="mp-about-paragraph">
+        We believe in zero-defect manufacturing and strictly adhere to ISO standards. Our dedicated R&D team ensures we stay ahead of the curve.
+      </p>
+
+      <a href="about.html" class="mp-about-btn">Read Our Story</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="about-head">
+      <span class="kicker">Who we are</span>
+      <h2>Precision manufacturing, built on trust</h2>
+      <p class="lede" style="margin-top:1rem;">From our facility in Gujarat, Madhav Polymers combines advanced tooling with strict quality control to deliver sealing solutions that perform for the long run — for builders, fabricators and manufacturers across India.</p>
+    </div>
+    <div class="capabilities">
+      <div class="cap">
+        <div class="mark">i</div>
+        <h3>Precision extrusion</h3>
+        <p>Continuous-line extrusion with tight tolerances, keeping every profile consistent from the first metre to the last.</p>
+      </div>
+      <div class="cap">
+        <div class="mark">ii</div>
+        <h3>Custom formulation</h3>
+        <p>Compounds tuned to the hardness, flexibility and weather resistance a project actually needs — not a generic default.</p>
+      </div>
+      <div class="cap">
+        <div class="mark">iii</div>
+        <h3>Reliable delivery</h3>
+        <p>Dependable lead times and pan-India logistics, so your project schedule never waits on our supply chain.</p>
+      </div>
+    </div>
+    <div style="margin-top:2.6rem;">
+      <a href="about.html" class="product-card__link" style="font-weight:600; color:var(--navy-800); border-bottom:1px solid var(--gold-500); padding-bottom:2px;">Learn more about us</a>
+    </div>
+  </div>
+</section>
+
+<section class="capabilities-section">
+
+  <span class="section-tagline">WHAT WE DO</span>
+  <h2 class="section-title">Our Capabilities</h2>
+
+  <div class="capabilities-grid">
+
+    <!-- Card 1 -->
+    <div class="capability-card">
+      <div class="icon-box">
+        <i class="fa-solid fa-microchip"></i>
+      </div>
+      <h3 class="card-title">CNC Machining</h3>
+      <p class="card-description">
+        High-precision turning and milling with tolerance up to +/- 0.005mm for complex geometries.
+      </p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="capability-card">
+      <div class="icon-box">
+        <i class="fa-solid fa-city"></i>
+      </div>
+      <h3 class="card-title">Custom Engineering</h3>
+      <p class="card-description">
+        From CAD design to prototype, we help you engineer parts that fit your specific needs.
+      </p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="capability-card">
+      <div class="icon-box">
+        <i class="fa-solid fa-truck-fast"></i>
+      </div>
+      <h3 class="card-title">Global Logistics</h3>
+      <p class="card-description">
+        Seamless export capabilities to USA & Europe with handled customs and secure packaging.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<section class="mp-catalogue-section">
+  <div class="mp-container">
+    <span class="mp-subtitle">Catalogue</span>
+    <h2 class="mp-title">Featured Products</h2>
+
+    <div class="mp-grid">
+      <!-- Card 1 -->
+      <a href="#" class="mp-card">
+        <div class="mp-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop" alt="Weatherstrip">
+        </div>
+        <div>
+          <h3 class="mp-product-title">Weatherstrip</h3>
+          <span class="mp-view-details">View Details &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="#" class="mp-card">
+        <div class="mp-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=600&auto=format&fit=crop" alt="Rubber Gasket">
+        </div>
+        <div>
+          <h3 class="mp-product-title">Rubber Gasket</h3>
+          <span class="mp-view-details">View Details &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="#" class="mp-card">
+        <div class="mp-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=600&auto=format&fit=crop" alt="PVC Seals & Profiles">
+        </div>
+        <div>
+          <h3 class="mp-product-title">PVC Seals & Profiles</h3>
+          <span class="mp-view-details">View Details &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 4 -->
+      <a href="#" class="mp-card">
+        <div class="mp-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop" alt="Door Seals">
+        </div>
+        <div>
+          <h3 class="mp-product-title">Door Seals</h3>
+          <span class="mp-view-details">View Details &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 5 -->
+      <a href="#" class="mp-card">
+        <div class="mp-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=600&auto=format&fit=crop" alt="Auto Drop Down Seal">
+        </div>
+        <div>
+          <h3 class="mp-product-title">Auto Drop Down Seal</h3>
+          <span class="mp-view-details">View Details &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="mp-ticker-section">
+  <!-- Section Title -->
+  <div class="mp-ticker-header">
+    <span class="mp-ticker-subtitle">TRUSTED BY INDUSTRY LEADERS</span>
+    <h2 class="mp-ticker-title">Serving across India.</h2>
+  </div>
+
+  <!-- Ticker Animation Container -->
+  <div class="mp-ticker-wrapper">
+    <div class="mp-ticker-track">
+
+      <!-- Primary Logo Group -->
+      <div class="mp-ticker-slide-group">
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-technal">
+            <span style="background:#000; color:#fff; padding:2px 6px; font-size:14px; border-radius:3px;">■</span> TECHNAL
+          </div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-ozone">OZONE</div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-kubik">
+            <span style="background:#e20074; color:#fff; padding:1px 6px; font-size:12px; border-radius:2px;">▶</span> KUBIK
+          </div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-hafele">HÄFELE</div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-aluplast">aluplast</div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-alucoat">ALU COAT</div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-waw">WAW</div>
+        </div>
+      </div>
+
+      <!-- Duplicate Logo Group (Ensures Unbroken Continuous Seamless Loop) -->
+      <div class="mp-ticker-slide-group" aria-hidden="true">
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-technal">
+            <span style="background:#000; color:#fff; padding:2px 6px; font-size:14px; border-radius:3px;">■</span> TECHNAL
+          </div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-ozone">OZONE</div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-kubik">
+            <span style="background:#e20074; color:#fff; padding:1px 6px; font-size:12px; border-radius:2px;">▶</span> KUBIK
+          </div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-hafele">HÄFELE</div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-aluplast">aluplast</div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-alucoat">ALU COAT</div>
+        </div>
+        <div class="mp-ticker-logo-item">
+          <div class="mp-brand-badge mp-badge-waw">WAW</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="products-head">
+      <div>
+        <span class="kicker">Catalogue</span>
+        <h2>Our product range</h2>
+      </div>
+      <p class="lede">Five core families of sealing solutions, each engineered and finished in-house.</p>
+    </div>
+    <div class="product-grid">
+
+      <a class="product-card" href="product-weatherstrip.html">
+        <svg class="icon" viewBox="0 0 48 48"><path d="M4 24c4-10 8-10 12 0s8 10 12 0 8-10 12 0 8 10 4 10" stroke="#F2A71B" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+        <h3>Weatherstrip</h3>
+        <p>Siliconized and non-siliconized weatherstrips that keep doors and windows draft- and dust-free.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="product-rubber-gasket.html">
+        <svg class="icon" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" stroke="#1B3E8C" stroke-width="2.4" fill="none"/><circle cx="24" cy="24" r="8" stroke="#F2A71B" stroke-width="2.4" fill="none"/></svg>
+        <h3>Rubber gasket</h3>
+        <p>Wedge, cord and shutter gaskets for windows, partitions and hand railing systems.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="product-pvc-seals-profiles.html">
+        <svg class="icon" viewBox="0 0 48 48"><rect x="6" y="10" width="9" height="28" rx="1.5" stroke="#F2A71B" stroke-width="2.2" fill="none"/><rect x="19.5" y="10" width="9" height="28" rx="1.5" stroke="#1B3E8C" stroke-width="2.2" fill="none"/><rect x="33" y="10" width="9" height="28" rx="1.5" stroke="#F2A71B" stroke-width="2.2" fill="none"/></svg>
+        <h3>PVC seals &amp; profiles</h3>
+        <p>Profile seals for kitchen, wardrobe, office partition and glass shower applications.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="product-door-seals.html">
+        <svg class="icon" viewBox="0 0 48 48"><rect x="10" y="6" width="20" height="36" rx="1" stroke="#1B3E8C" stroke-width="2.2" fill="none"/><circle cx="26" cy="24" r="1.6" fill="#F2A71B"/></svg>
+        <h3>Door seals</h3>
+        <p>Bottom seals and glass door seals engineered for a tight, quiet close.</p>
+        <span class="view">View range</span>
+      </a>
+
+      <a class="product-card" href="product-auto-drop-down-seal.html">
+        <svg class="icon" viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="8" rx="1.5" stroke="#F2A71B" stroke-width="2.2" fill="none"/><path d="M24 20v14m0 0l-6-6m6 6l6-6" stroke="#1B3E8C" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Auto drop down seal</h3>
+        <p>Concealed and external drop-down seals that activate automatically on door closure.</p>
+        <span class="view">View range</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="quality">
+  <div class="wrap">
+    <blockquote>"Zero-defect manufacturing isn't a slogan here — it's the standard every batch is checked against."</blockquote>
+    <div class="badges">
+      <span class="badge">ISO 9001:2015</span>
+      <span class="badge">In-house R&amp;D</span>
+      <span class="badge">Export Ready</span>
+      <span class="badge">CNC Precision Tooling</span>
+    </div>
+    <div style="margin-top:2.2rem;">
+      <a href="quality.html" class="btn btn-outline">See our quality process</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Let's discuss your project</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto;">Reach out for a sample, a spec sheet, or a competitive quote — our team typically replies within one business day.</p>
+    <div class="btns">
+      <a href="contact.html" class="btn btn-gold">Contact Us</a>
+      <a href="custom-solution.html" class="btn btn-outline">Custom Solutions</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="mp-contact-section">
+  <div class="mp-contact-container">
+
+    <!-- LEFT COLUMN: Contact Details -->
+    <div class="mp-contact-info">
+      <h2 class="mp-contact-heading">Let's Discuss<br>Your Project</h2>
+      <p class="mp-contact-subtext">Ready to upgrade your supply chain? Reach out for a competitive quote.</p>
+
+      <!-- Address Item -->
+      <div class="mp-info-item">
+        <div class="mp-info-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <div class="mp-info-content">
+          <h4>Factory Address</h4>
+          <p>Oscar Industrial Park, Plot No. 25 & 26,<br>Sopan Industrial Zone-2 Gate, Opp.<br>Umiya Industrial Zone-5, RIBDA -360<br>311 Dist. Rajkot.</p>
+        </div>
+      </div>
+
+      <!-- Email Item -->
+      <div class="mp-info-item">
+        <div class="mp-info-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <div class="mp-info-content">
+          <h4>Email Us</h4>
+          <p><a href="mailto:sunmarkgroup@gmail.com">Madhavpolymers05@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Contact Form Card -->
+    <div class="mp-form-card">
+      <div id="mpSuccessAlert" class="mp-alert-success">
+        Message sent successfully.
+      </div>
+
+      <form id="mpWhatsAppForm" onsubmit="handleFormSubmit(event)">
+        <div class="mp-form-row">
+          <input type="text" id="mpName" class="mp-form-input" placeholder="Your Name" required />
+          <input type="email" id="mpEmail" class="mp-form-input" placeholder="Email Address" required />
+        </div>
+
+        <div class="mp-form-group">
+          <input type="tel" id="mpPhone" class="mp-form-input" placeholder="Phone Number (Optional)" />
+        </div>
+
+        <div class="mp-form-group">
+          <textarea id="mpDetails" class="mp-form-textarea" placeholder="Project Details" required></textarea>
+        </div>
+
+        <button type="submit" class="mp-submit-btn">SEND INQUIRY</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+<section class="mp-catalogue-section">
+    <div class="mp-container">
+      <span class="mp-subtitle">Catalogue</span>
+      <h2 class="mp-title">Featured Products</h2>
+
+      <div class="mp-grid">
+        <!-- Card 1 -->
+        <a href="products.html" class="mp-card">
+          <div class="mp-image-wrapper">
+            <img src="assets/mu.jpg"
+              alt="Weatherstrip">
+          </div>
+          <div>
+            <h3 class="mp-product-title">Polymer Granules</h3>
+            <span class="mp-view-details">View Details &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="products.html" class="mp-card">
+          <div class="mp-image-wrapper">
+            <img src="assets/Soft PVC Molding.png"
+              alt="Rubber Gasket">
+          </div>
+          <div>
+            <h3 class="mp-product-title">Soft PVC Molding</h3>
+            <span class="mp-view-details">View Details &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="products.html" class="mp-card">
+          <div class="mp-image-wrapper">
+            <img src="assets/Wire & Cables.png"
+              alt="PVC Seals & Profiles">
+          </div>
+          <div>
+            <h3 class="mp-product-title">Wire Insulation & Cable Sleeving</h3>
+            <span class="mp-view-details">View Details &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Card 4 -->
+        <a href="products.html" class="mp-card">
+          <div class="mp-image-wrapper">
+            <img src="assets/pvc-pip.jpg"
+              alt="Door Seals">
+          </div>
+          <div>
+            <h3 class="mp-product-title">Flexible PVC Hoses</h3>
+            <span class="mp-view-details">View Details &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Card 5 -->
+        <a href="products.html" class="mp-card">
+          <div class="mp-image-wrapper">
+            <img src="assets/white.jpg"
+              alt="Auto Drop Down Seal">
+          </div>
+          <div>
+            <h3 class="mp-product-title">PTFE Components </h3>
+            <span class="mp-view-details">View Details &rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+<!-- Shared footer is injected here by js/include.js -->
+<div id="footer-placeholder"></div>
+
+<script>
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    // 1. Enter target WhatsApp number (with Country Code, without + sign)
+    const whatsappNumber = "919876543210"; // REPLACE WITH YOUR PHONE NUMBER
+
+    // 2. Fetch input field values
+    const name = document.getElementById('mpName').value.trim();
+    const email = document.getElementById('mpEmail').value.trim();
+    const phone = document.getElementById('mpPhone').value.trim() || 'Not provided';
+    const details = document.getElementById('mpDetails').value.trim();
+
+    // 3. Format the message for WhatsApp
+    const whatsappMessage = `*New Project Inquiry*%0A%0A` +
+      `*Name:* ${encodeURIComponent(name)}%0A` +
+      `*Email:* ${encodeURIComponent(email)}%0A` +
+      `*Phone:* ${encodeURIComponent(phone)}%0A` +
+      `*Project Details:* ${encodeURIComponent(details)}`;
+
+    // 4. Reveal success message bar
+    const successAlert = document.getElementById('mpSuccessAlert');
+    successAlert.style.display = 'block';
+
+    // 5. Open WhatsApp chat in a new browser tab
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+    setTimeout(() => {
+      window.open(whatsappURL, '_blank');
+    }, 400);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const section = document.getElementById("mpAboutSection");
+
+    // IntersectionObserver triggers animation when 20% of section enters viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            section.classList.add("mp-active");
+            observer.unobserve(entry.target); // Triggers animation once
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (section) {
+      observer.observe(section);
+    }
+  });
+
+   document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".hero-slider .slide");
+  const prevBtn = document.querySelector(".hero-slider .prev-btn");
+  const nextBtn = document.querySelector(".hero-slider .next-btn");
+
+  let currentIndex = 0;
+  const slideInterval = 6000; // 6 seconds per slide
+  let timer;
+
+  function showSlide(index) {
+    if (index >= slides.length) currentIndex = 0;
+    else if (index < 0) currentIndex = slides.length - 1;
+    else currentIndex = index;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === currentIndex);
+    });
+  }
+
+  function nextSlide() {
+    showSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentIndex - 1);
+  }
+
+  function startTimer() {
+    timer = setInterval(nextSlide, slideInterval);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    startTimer();
+  }
+
+  // Button Listeners
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    resetTimer();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+    resetTimer();
+  });
+
+  // Start autoplay
+  startTimer();
+});
+</script>
+
+<!-- Loads header.html / footer.html into the placeholders above,
+     and re-binds header scroll + mobile menu + search behavior -->
+<script src="include.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
