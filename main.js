@@ -114,8 +114,8 @@
     // When user selects any tab/link, close menu and restore scroll
     nav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', (e) => {
-        // If it's a dropdown toggle on mobile/tablet, don't close the drawer
-        if (window.innerWidth <= 991 && link.parentElement.classList.contains('has-dropdown')) {
+        // If it's a dropdown or submenu toggle on mobile/tablet, don't close the drawer
+        if (window.innerWidth <= 991 && (link.parentElement.classList.contains('has-dropdown') || link.parentElement.classList.contains('has-submenu'))) {
           e.preventDefault();
           link.parentElement.classList.toggle('open');
           return;

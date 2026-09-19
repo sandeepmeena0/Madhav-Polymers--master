@@ -90,13 +90,16 @@
 
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
 
-    // Tap a dropdown label on mobile to expand it instead of following the link
-    document.querySelectorAll('.has-dropdown > a').forEach((link) => {
+    // When user selects any tab/link, close menu and restore scroll
+    nav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', (e) => {
-        if (window.innerWidth <= 991) {
+        // If it's a dropdown or submenu toggle on mobile/tablet, don't close the drawer
+        if (window.innerWidth <= 991 && (link.parentElement.classList.contains('has-dropdown') || link.parentElement.classList.contains('has-submenu'))) {
           e.preventDefault();
           link.parentElement.classList.toggle('open');
+          return;
         }
+        nav.classList.remove('open');
       });
     });
   }

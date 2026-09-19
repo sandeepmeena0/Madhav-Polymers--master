@@ -8,13 +8,8 @@
    ======================================================== */
 
 (function () {
-  // Synchronous cache injection for instant 0ms header render on page transition
-  const cachedHeader = sessionStorage.getItem('mp_header_cached');
+// Removed synchronous cache injection to prevent unstyled logo flash (FOUC) on page transitions
   const hpSync = document.getElementById('header-placeholder');
-  if (hpSync && !hpSync.querySelector('header') && cachedHeader) {
-    hpSync.innerHTML = cachedHeader;
-    setActiveNavItem();
-  }
 
   async function loadInto(id, url) {
     const el = document.getElementById(id);
@@ -28,9 +23,6 @@
       if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
       const text = await res.text();
       el.innerHTML = text;
-      if (id === 'header-placeholder') {
-        sessionStorage.setItem('mp_header_cached', text);
-      }
     } catch (err) {
       console.error(err);
     }
@@ -107,8 +99,8 @@
     // When user selects any tab/link, close menu and restore scroll
     nav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', (e) => {
-        // If it's a dropdown toggle on mobile/tablet, don't close the drawer
-        if (window.innerWidth <= 991 && link.parentElement.classList.contains('has-dropdown')) {
+        // If it's a dropdown or submenu toggle on mobile/tablet, don't close the drawer
+        if (window.innerWidth <= 991 && (link.parentElement.classList.contains('has-dropdown') || link.parentElement.classList.contains('has-submenu'))) {
           e.preventDefault();
           link.parentElement.classList.toggle('open');
           return;
@@ -171,62 +163,12 @@
       loadInto('footer-placeholder', 'footer.html'),
     ]);
 
-    fixNavigationLinks();
     setActiveNavItem();
     initHeaderScroll();
     initMobileMenu();
     initSearch();
 
     document.dispatchEvent(new CustomEvent('partialsLoaded'));
-  });
-
-  function fixNavigationLinks() {
-    const isWebServer = window.location.protocol.startsWith('http');
-
-    // Ensure all header and footer navigation links route reliably
-    document.querySelectorAll('header a, footer a, .main-nav a, #footer-placeholder a').forEach((a) => {
-      const href = a.getAttribute('href');
-      if (!href || href.startsWith('http://') || href.startsWith('https://') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#') || href.startsWith('javascript:')) {
-        return;
-      }
-
-      const text = (a.textContent || '').trim().toLowerCase();
-      const isHome = text === 'home' || href.endsWith('index.html') || href === '/' || href === 'index.html';
-
-      if (isWebServer) {
-        if (isHome) {
-          a.setAttribute('href', '/index.html');
-        } else {
-          // Normalize relative links to root-relative path on web servers / Netlify
-          const clean = href.replace(/^(\.\.\/|\.\/)+/, '').replace(/^\/+/, '');
-          a.setAttribute('href', '/' + clean);
-        }
-      } else {
-        // Local file protocol
-        if (isHome) {
-          const isSubfolder = window.location.pathname.includes('/rubber-gasket/');
-          a.setAttribute('href', isSubfolder ? '../index.html' : 'index.html');
-        }
-      }
-    });
-  }
-
-  // Intercept any click on footer 'Home' link to guarantee it always routes to the main Home page
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (!link) return;
-    const text = (link.textContent || '').trim().toLowerCase();
-    const inFooter = link.closest('footer, #footer-placeholder');
-
-    if (text === 'home' && inFooter) {
-      e.preventDefault();
-      if (window.location.protocol.startsWith('http')) {
-        window.location.href = '/index.html';
-      } else {
-        const isSubfolder = window.location.pathname.includes('/rubber-gasket/');
-        window.location.href = isSubfolder ? '../index.html' : 'index.html';
-      }
-    }
   });
 })();
 

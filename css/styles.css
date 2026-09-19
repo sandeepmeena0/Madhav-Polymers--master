@@ -1401,7 +1401,8 @@ footer ul li a:hover {
     border-top-color: var(--navy-900) !important;
   }
 
-  .dropdown {
+  .dropdown,
+  .submenu {
     position: static;
     opacity: 1;
     visibility: visible;
@@ -1413,8 +1414,17 @@ footer ul li a:hover {
     min-width: 0;
   }
 
-  .has-dropdown.open .dropdown {
+  .has-dropdown.open > .dropdown,
+  .has-submenu.open > .submenu {
     display: block;
+  }
+  
+  .caret-right {
+    transition: transform 0.3s ease;
+  }
+  
+  .has-submenu.open > a .caret-right {
+    transform: rotate(90deg);
   }
 
   .menu-toggle {
@@ -2678,52 +2688,7 @@ header.scrolled .nav-search-btn svg {
 }
 
 
-/* Base Dropdown Setup */
-.main-nav ul li {
-  position: relative;
-}
-
-/* Primary Dropdown Menu */
-.dropdown {
-  position: absolute;
-  top: 75%;
-  left: 0;
-  display: none;
-  background-color: #ffffff;
-  min-width: 220px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  list-style: none;
-  padding: 14px 0;
-  z-index: 100;
-}
-
-.has-dropdown:hover>.dropdown {
-  display: block;
-}
-
-/* Secondary Submenu (Nested Sub-Pages) */
-.has-submenu {
-  position: relative;
-}
-
-.submenu {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  /* Opens to the right of Rubber Gasket */
-  display: none;
-  background-color: #ffffff;
-  min-width: 320px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  list-style: none;
-  padding: 8px 0;
-  z-index: 101;
-}
-
-/* Show Submenu on Hover */
-.has-submenu:hover>.submenu {
-  display: block;
-}
+/* Base Dropdown Setup moved to @media (min-width: 992px) below */
 
 /* Arrow indicator for submenu */
 .caret-right {
@@ -3151,9 +3116,8 @@ header.scrolled .nav-search-btn svg {
 }
 
 /* Base Dropdown Setup — desktop only now, so this can never override
-   the mobile accordion behavior defined in @media (max-width:680px)
-   above, regardless of which block comes first in the file. */
-@media (min-width: 681px) {
+   the mobile accordion behavior */
+@media (min-width: 992px) {
   .main-nav ul li {
     position: relative;
   }
@@ -3165,60 +3129,6 @@ header.scrolled .nav-search-btn svg {
     display: none;
     background-color: #ffffff;
     min-width: 220px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    list-style: none;
-    padding: 14px 0;
-    z-index: 100;
-  }
-
-  .has-dropdown:hover>.dropdown {
-    display: block;
-  }
-
-  /* Secondary Submenu (Nested Sub-Pages) */
-  .has-submenu {
-    position: relative;
-  }
-
-  .submenu {
-    position: absolute;
-    top: 0;
-    left: 92%;
-    display: none;
-    background-color: #ffffff;
-    min-width: 176px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    list-style: none;
-    padding: 8px 0;
-    z-index: 101;
-  }
-
-  .has-submenu:hover>.submenu {
-    display: block;
-  }
-
-  .caret-right {
-    float: right;
-    font-size: 0.8rem;
-  }
-}
-
-
-/* Base Dropdown Setup — desktop only now, so this can never override
-   the mobile accordion behavior defined in @media (max-width:680px)
-   above, regardless of which block comes first in the file. */
-@media (min-width: 681px) {
-  .main-nav ul li {
-    position: relative;
-  }
-
-  .dropdown {
-    position: absolute;
-    top: 75%;
-    left: 0;
-    display: none;
-    background-color: #ffffff;
-    min-width: 170px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     list-style: none;
     padding: 14px 0;
@@ -3256,6 +3166,9 @@ header.scrolled .nav-search-btn svg {
     font-size: 0.8rem;
   }
 }
+
+
+/* Second desktop block removed as duplicate */
 
 .mp-badge-fenestrak {
   font-weight: 700;

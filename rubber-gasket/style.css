@@ -183,6 +183,7 @@ body {
 .topbar-controls {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
@@ -451,6 +452,14 @@ body {
   }
   .search-box {
     max-width: 100%;
+  }
+  .topbar-controls {
+    justify-content: space-between;
+  }
+  .btn-download-catalog {
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center;
   }
 }
 
