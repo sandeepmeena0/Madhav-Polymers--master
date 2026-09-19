@@ -37,11 +37,25 @@
   }
 
   function setActiveNavItem() {
-    let current = window.location.pathname.split('/').pop();
-    if (!current) current = 'index.html';
+    let rawPath = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+    let current = rawPath.split('/').pop() || 'index';
+    current = current.replace(/\.html$/, '');
+    if (!current || current === 'index') current = 'index';
+
+    const productSubpages = [
+      'rubber-gasket', 'products', 'hand-railing-rubber-gasket',
+      'kitchen-and-wardrobe-profiles-rubber-gasket', 'office-partition-system-rubber-gasket',
+      'upvc-window-rubber-gasket', 'aluminum-window-rubber-gasket',
+      'wedge-and-cord-rubber-gasket', 'tpe-tpv-gaskets', 'curtain-wall', 'aluminium-section'
+    ];
 
     document.querySelectorAll('.main-nav li[data-page]').forEach((li) => {
-      li.classList.toggle('active', li.getAttribute('data-page') === current);
+      let dataPage = (li.getAttribute('data-page') || '').toLowerCase().replace(/\.html$/, '');
+      let isActive = (dataPage === current);
+      if (dataPage === 'products' && productSubpages.includes(current)) {
+        isActive = true;
+      }
+      li.classList.toggle('active', isActive);
     });
   }
 
