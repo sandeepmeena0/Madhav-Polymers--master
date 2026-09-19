@@ -563,7 +563,7 @@ body {
 @media (max-width: 992px) {
   .subpage-hero {
     min-height: 320px;
-    padding: 60px 20px;
+    padding: 100px 20px 60px;
   }
 }
 
@@ -571,7 +571,7 @@ body {
 @media (max-width: 576px) {
   .subpage-hero {
     min-height: 240px;
-    padding: 45px 16px;
+    padding: 90px 16px 45px;
   }
   
   .hero-breadcrumbs {
