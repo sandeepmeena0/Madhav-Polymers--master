@@ -80,7 +80,7 @@
     // Tap a dropdown label on mobile to expand it instead of following the link
     document.querySelectorAll('.has-dropdown > a').forEach((link) => {
       link.addEventListener('click', (e) => {
-        if (window.innerWidth <= 680) {
+        if (window.innerWidth <= 991) {
           e.preventDefault();
           link.parentElement.classList.toggle('open');
         }

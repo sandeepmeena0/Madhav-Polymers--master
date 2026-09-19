@@ -76,7 +76,7 @@
     if (!toggle || !nav) return;
 
     function lockScroll() {
-      if (window.innerWidth <= 680) {
+      if (window.innerWidth <= 991) {
         document.body.classList.add('menu-locked');
         document.documentElement.classList.add('menu-locked');
       }
@@ -101,8 +101,8 @@
     // When user selects any tab/link, close menu and restore scroll
     nav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', (e) => {
-        // If it's a dropdown toggle on mobile, don't close the drawer
-        if (window.innerWidth <= 680 && link.parentElement.classList.contains('has-dropdown')) {
+        // If it's a dropdown toggle on mobile/tablet, don't close the drawer
+        if (window.innerWidth <= 991 && link.parentElement.classList.contains('has-dropdown')) {
           e.preventDefault();
           link.parentElement.classList.toggle('open');
           return;
@@ -122,7 +122,7 @@
     const iconBtn = form.querySelector('.nav-search__icon-btn');
     if (iconBtn) {
       iconBtn.addEventListener('click', (e) => {
-        if (window.innerWidth <= 680) {
+        if (window.innerWidth <= 991) {
           if (!form.classList.contains('search-open')) {
             e.preventDefault();
             form.classList.add('search-open');
