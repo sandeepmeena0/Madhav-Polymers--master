@@ -309,8 +309,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             return codeA.localeCompare(codeB);
           });
         } else {
-          // default
-          sortedCards = [...originalCards];
+          // default (Smart) - random mix
+          sortedCards = [...originalCards].sort(() => Math.random() - 0.5);
         }
 
         productGrid.innerHTML = '';
