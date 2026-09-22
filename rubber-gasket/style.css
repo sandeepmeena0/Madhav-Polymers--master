@@ -385,6 +385,86 @@ body {
   background-color: var(--yellow-50);
 }
 
+/* --- List View Overrides --- */
+.product-grid.list-view {
+  grid-template-columns: 1fr;
+}
+.product-grid.list-view .product-item-card {
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+}
+.product-grid.list-view .product-image-container {
+  width: 250px;
+  height: 200px;
+  border-bottom: none;
+  border-right: 1px solid #f1f5f9;
+  flex-shrink: 0;
+}
+.product-grid.list-view .product-item-details {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.product-grid.list-view .item-title,
+.product-grid.list-view .item-code-badge {
+  margin-bottom: 0;
+  margin-right: 15px;
+}
+.product-grid.list-view .item-specs-grid,
+.product-grid.list-view .item-qty-row {
+  margin-bottom: 0;
+  border-top: none;
+  padding-top: 0;
+  width: auto;
+}
+.product-grid.list-view .item-actions {
+  flex-direction: column;
+  margin-top: 0;
+  min-width: 120px;
+}
+
+@media (max-width: 768px) {
+  .product-grid.list-view .product-item-card {
+    flex-direction: column;
+  }
+  .product-grid.list-view .product-image-container {
+    width: 100%;
+    height: 180px;
+    border-right: none;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .product-grid.list-view .product-item-details {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .product-grid.list-view .item-title,
+  .product-grid.list-view .item-code-badge {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+  .product-grid.list-view .item-code-badge {
+    margin-bottom: 12px;
+  }
+  .product-grid.list-view .item-specs-grid,
+  .product-grid.list-view .item-qty-row {
+    width: 100%;
+  }
+  .product-grid.list-view .item-specs-grid {
+    margin-bottom: 12px;
+  }
+  .product-grid.list-view .item-qty-row {
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+    margin-bottom: 14px;
+  }
+  .product-grid.list-view .item-actions {
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
 /* Footer */
 .main-footer {
   background: var(--dark-950);
