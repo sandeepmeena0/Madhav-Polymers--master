@@ -321,6 +321,27 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
   }
 
+  // --- C. Grid / List View Toggle ---
+  const viewBtn = document.querySelector('.view-btn');
+  const productGridEle = document.querySelector('.product-grid');
+  if (viewBtn && productGridEle) {
+    viewBtn.addEventListener('click', () => {
+      productGridEle.classList.toggle('list-view');
+      const isListView = productGridEle.classList.contains('list-view');
+      
+      if (isListView) {
+        // List icon
+        viewBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>';
+        viewBtn.title = 'List View';
+      } else {
+        // Grid icon
+        viewBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg>';
+        viewBtn.title = 'Grid View';
+      }
+    });
+  }
+
+
 
   // --- D. Intersection Observer for About Section ---
   const aboutSection = document.getElementById("mpAboutSection");
