@@ -1,34 +1,92 @@
- document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.querySelector('.catalog-search-input');
-    const productCards = document.querySelectorAll('.product-item-card');
-    const resultsCount = document.querySelector('.results-count');
+document.addEventListener('DOMContentLoaded', function () {
+  // --- 1. SEARCH FUNCTIONALITY ---
+  const searchInput = document.querySelector('.catalog-search-input, #catalogSearchInput');
+  const searchClear = document.querySelector('.search-clear-btn, #catalogSearchClear');
+  const productCards = document.querySelectorAll('.product-item-card');
+  const resultsCount = document.querySelector('.results-count');
+  const productGrid = document.querySelector('.product-grid, #productGrid');
 
-    if (searchInput) {
-      searchInput.addEventListener('input', function (e) {
-        const query = e.target.value.toLowerCase().trim();
-        let visibleCount = 0;
+  // Store original order for 'Default (Smart)' sorting
+  const cardsArray = Array.from(productCards);
+  cardsArray.forEach((card, index) => {
+    card.dataset.originalOrder = index;
+  });
 
-        productCards.forEach(card => {
-          const title = card.querySelector('.item-title')?.textContent.toLowerCase() || '';
-          const code = card.querySelector('.item-code-badge')?.textContent.toLowerCase() || '';
-          const specs = card.querySelector('.item-specs-grid')?.textContent.toLowerCase() || '';
+  function performSearch(query) {
+    let visibleCount = 0;
+    productCards.forEach(card => {
+      const title = card.querySelector('.item-title')?.textContent.toLowerCase() || '';
+      const code = card.querySelector('.item-code-badge')?.textContent.toLowerCase() || '';
+      const specs = card.querySelector('.item-specs-grid')?.textContent.toLowerCase() || '';
+      const altText = card.querySelector('img')?.getAttribute('alt')?.toLowerCase() || '';
 
-          // Check if product title, code, or spec contains the searched keyword
-          if (title.includes(query) || code.includes(query) || specs.includes(query)) {
-            card.style.display = ''; // Show card
-            visibleCount++;
-          } else {
-            card.style.display = 'none'; // Hide card
-          }
-        });
+      if (title.includes(query) || code.includes(query) || specs.includes(query) || altText.includes(query)) {
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
 
-        // Update total found count
-        if (resultsCount) {
-          resultsCount.textContent = `${visibleCount} Product${visibleCount === 1 ? '' : 's'} Found`;
+    if (resultsCount) {
+      resultsCount.textContent = `${visibleCount} Product${visibleCount === 1 ? '' : 's'} Found`;
+    }
+    
+    if (searchClear) {
+      searchClear.hidden = query.length === 0;
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function (e) {
+      performSearch(e.target.value.toLowerCase().trim());
+    });
+  }
+
+  if (searchClear) {
+    searchClear.addEventListener('click', function () {
+      if (searchInput) {
+        searchInput.value = '';
+        performSearch('');
+      }
+    });
+  }
+
+  // --- 2. SORT FUNCTIONALITY ---
+  const sortSelect = document.querySelector('.sort-box select');
+  if (sortSelect && productGrid) {
+    sortSelect.addEventListener('change', function (e) {
+      const sortBy = e.target.value;
+      const allCards = Array.from(productCards);
+      
+      allCards.sort((a, b) => {
+        if (sortBy === 'name') {
+          const titleA = a.querySelector('.item-title')?.textContent.trim().toLowerCase() || '';
+          const titleB = b.querySelector('.item-title')?.textContent.trim().toLowerCase() || '';
+          return titleA.localeCompare(titleB);
+        } else if (sortBy === 'code') {
+          const codeA = a.querySelector('.item-code-badge')?.textContent.trim().toLowerCase() || '';
+          const codeB = b.querySelector('.item-code-badge')?.textContent.trim().toLowerCase() || '';
+          return codeA.localeCompare(codeB);
+        } else {
+          return parseInt(a.dataset.originalOrder) - parseInt(b.dataset.originalOrder);
         }
       });
-    }
+      
+      // Re-append in new order
+      allCards.forEach(card => productGrid.appendChild(card));
+    });
+  }
+
+  // --- 3. DOWNLOAD CATALOG FUNCTIONALITY ---
+  const downloadBtns = document.querySelectorAll('.btn-download-catalog');
+  downloadBtns.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      alert('The Madhav Polymers Product Catalog is currently being updated. Please check back later or contact us for a copy.');
+    });
   });
+});
 
   /* ========================================================
    Madhav Polymers — Header / Footer loader
