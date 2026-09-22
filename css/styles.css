@@ -2710,6 +2710,10 @@ header.scrolled .nav-search-btn svg {
   padding: 80px 20px;
 }
 
+.page-hero-about {
+  min-height: 100vh;
+}
+
 /* Background Video / Image Styling */
 .page-hero .hero-video {
   position: absolute;
