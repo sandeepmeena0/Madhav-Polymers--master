@@ -182,7 +182,7 @@
 
       <!-- LEFT COLUMN: Image slides from Left -->
       <div class="mp-about-image-wrapper mp-animate-left">
-        <img src="assets/newimg.png" alt="Madhav Polymers Manufacturing Excellence Factory Machine" />
+        <img src="assets/newimg.png" alt="Madhav Polymers Manufacturing Excellence Factory Machine" loading="eager" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop';" />
       </div>
 
       <!-- RIGHT COLUMN: Text content slides from Right -->
@@ -647,21 +647,23 @@
 
     document.addEventListener("DOMContentLoaded", function () {
       const section = document.getElementById("mpAboutSection");
-
-      // IntersectionObserver triggers animation when 20% of section enters viewport
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              section.classList.add("mp-active");
-              observer.unobserve(entry.target); // Triggers animation once
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-
       if (section) {
+        // Fallback: ensure section is displayed active even if scrolling is minimal
+        setTimeout(() => {
+          section.classList.add("mp-active");
+        }, 500);
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                section.classList.add("mp-active");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.05 }
+        );
         observer.observe(section);
       }
     });

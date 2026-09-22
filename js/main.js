@@ -346,6 +346,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   // --- D. Intersection Observer for About Section ---
   const aboutSection = document.getElementById("mpAboutSection");
   if (aboutSection) {
+    setTimeout(() => {
+      aboutSection.classList.add("mp-active");
+    }, 500);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -355,7 +359,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.05 }
     );
     observer.observe(aboutSection);
   }
