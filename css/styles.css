@@ -2711,7 +2711,7 @@ header.scrolled .nav-search-btn svg {
 }
 
 .page-hero-about {
-  min-height: 100vh;
+  min-height: 100vh !important;
 }
 
 /* Background Video / Image Styling */
