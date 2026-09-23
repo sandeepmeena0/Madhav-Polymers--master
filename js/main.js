@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     sortSelects.forEach(sortSelect => {
       sortSelect.addEventListener('change', function (e) {
         const sortValue = e.target.value;
-        let sortedCards = Array.from(productCards);
+        let sortedCards = Array.from(originalCards);
 
         if (sortValue === 'name') {
           sortedCards.sort((a, b) => {
@@ -309,8 +309,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             return codeA.localeCompare(codeB);
           });
         } else {
-          // default (Smart) - random mix
-          sortedCards = [...originalCards].sort(() => Math.random() - 0.5);
+          // Default (Smart) - original order
+          sortedCards = [...originalCards];
         }
 
         productGrid.innerHTML = '';
