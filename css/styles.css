@@ -3215,12 +3215,13 @@ header.scrolled .nav-search-btn svg {
 /* Main Catalog Section Layout */
 .catalog-section {
   margin-top: 0px;
-  padding: 10px 20px;
+  padding: 40px 5%;
 }
 
 .container {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0 15px;
 }
 
 /* Topbar Controls */
