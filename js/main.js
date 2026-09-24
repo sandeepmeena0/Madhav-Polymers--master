@@ -281,8 +281,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   const qParam = urlParams.get('q') || urlParams.get('search');
   if (qParam && searchInputs.length > 0) {
     searchInputs.forEach(i => i.value = qParam);
-    performSearch(qParam);
   }
+  
+  // Always perform initial search to update correct product counts on page load
+  performSearch(qParam || '');
 
 
   // --- C. Catalog Sort By ---
