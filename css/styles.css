@@ -3333,9 +3333,14 @@ header.scrolled .nav-search-btn svg {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+}
+
+.product-item-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
 }
 
 .product-image-container {
@@ -3443,11 +3448,13 @@ header.scrolled .nav-search-btn svg {
   padding: 8px 0;
   border-radius: 6px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .btn-quote:hover {
   background-color: var(--yellow-600);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(242, 167, 27, 0.4);
 }
 
 .btn-whatsapp {
@@ -3461,11 +3468,15 @@ header.scrolled .nav-search-btn svg {
   padding: 8px 0;
   border-radius: 6px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .btn-whatsapp:hover {
-  background-color: var(--yellow-50);
+  background-color: #25D366;
+  border-color: #25D366;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
 }
 
 /* --- List View Overrides --- */
@@ -3612,6 +3623,9 @@ header.scrolled .nav-search-btn svg {
   }
   .search-box {
     max-width: 100%;
+  }
+  .view-toggle {
+    display: none !important;
   }
   .product-grid.list-view .product-item-card {
     flex-direction: column;
