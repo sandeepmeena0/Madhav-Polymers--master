@@ -681,6 +681,43 @@
     });
   </script>
   <script src="js/main.js"></script>
+  
+  <!-- Get Quote Modal -->
+  <div id="quoteModal" class="quote-modal-overlay">
+    <div class="quote-modal-content">
+      <button id="closeQuoteModal" class="quote-modal-close" aria-label="Close">&times;</button>
+      <h2>Product Inquiry</h2>
+      <p>Get a quote for our advanced polymer solutions.</p>
+      <form id="quoteForm" class="quote-form" action="https://formsubmit.co/info@madhavpolymers.in" method="POST">
+        <!-- Configuration for FormSubmit -->
+        <input type="hidden" name="_next" value="https://madhavpolymers.in">
+        <input type="hidden" name="_subject" value="New Quote Request from Website">
+        <input type="hidden" name="_captcha" value="false">
+        
+        <div class="form-group">
+          <label for="quoteProduct">Product</label>
+          <input type="text" id="quoteProduct" name="product" required readonly>
+        </div>
+        <div class="form-group">
+          <label for="quoteName">Your Name</label>
+          <input type="text" id="quoteName" name="name" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label for="quoteEmail">Email Address</label>
+          <input type="email" id="quoteEmail" name="email" required placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label for="quotePhone">Phone Number</label>
+          <input type="tel" id="quotePhone" name="phone" required placeholder="+91 9876543210">
+        </div>
+        <div class="form-group">
+          <label for="quoteMessage">Message</label>
+          <textarea id="quoteMessage" name="message" rows="4" placeholder="Please describe your requirements..."></textarea>
+        </div>
+        <button type="submit" class="quote-submit-btn">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>

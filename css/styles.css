@@ -3740,3 +3740,135 @@ header.scrolled .nav-search-btn svg {
   font-size: 0.8rem;
   color: #78716c;
 }
+
+/* =========================================
+   Get Quote Modal & Button
+   ========================================= */
+.quote-btn {
+  background-color: var(--gold-500, #F2A71B);
+  color: #14203D;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.quote-btn:hover {
+  background-color: var(--gold-600, #D98A0A);
+}
+
+.quote-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.quote-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quote-modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.quote-modal-overlay.active .quote-modal-content {
+  transform: translateY(0);
+}
+
+.quote-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.quote-modal-close:hover {
+  color: #000;
+}
+
+.quote-modal-content h2 {
+  font-family: var(--serif);
+  color: var(--navy-900);
+  margin-bottom: 5px;
+}
+
+.quote-modal-content p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.quote-form .form-group {
+  margin-bottom: 15px;
+}
+
+.quote-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--ink);
+}
+
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.quote-form input:focus,
+.quote-form select:focus,
+.quote-form textarea:focus {
+  border-color: var(--gold-500);
+}
+
+.quote-submit-btn {
+  background: var(--navy-900);
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.quote-submit-btn:hover {
+  background: var(--navy-700);
+}

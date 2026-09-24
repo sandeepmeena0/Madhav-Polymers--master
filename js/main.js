@@ -190,6 +190,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   initHeaderScroll();
   initMobileMenu();
   initHeaderSearch();
+  initQuoteModal();
   document.dispatchEvent(new CustomEvent('partialsLoaded'));
 
 
@@ -413,6 +414,65 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     startTimer();
+  }
+
+  // --- Quote Modal Logic ---
+  function initQuoteModal() {
+    const quoteModal = document.getElementById('quoteModal');
+    const closeBtn = document.getElementById('closeQuoteModal');
+    const quoteForm = document.getElementById('quoteForm');
+
+    if (!quoteModal) {
+      console.warn('Quote modal not found in DOM.');
+      return;
+    }
+
+    function closeModal() {
+      quoteModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Event Delegation for all "Get Quote" buttons on product cards
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-quote');
+      if (btn) {
+        e.preventDefault();
+        
+        // Find product details
+        const productCard = btn.closest('.product-item-card, .product-card');
+        if (productCard) {
+          const title = productCard.querySelector('.item-title, h3')?.textContent.trim() || '';
+          const code = productCard.querySelector('.item-code-badge')?.textContent.trim() || '';
+          
+          const quoteProductInput = document.getElementById('quoteProduct');
+          if (quoteProductInput) {
+            quoteProductInput.value = title + (code ? ` - ${code}` : '');
+          }
+        }
+
+        quoteModal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      }
+    });
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+
+    quoteModal.addEventListener('click', (e) => {
+      if (e.target === quoteModal) {
+        closeModal();
+      }
+    });
+
+    if (quoteForm) {
+      // Allow standard form submission so FormSubmit.co can show the Activation page
+      quoteForm.addEventListener('submit', () => {
+        const submitBtn = quoteForm.querySelector('button[type="submit"]');
+        submitBtn.textContent = 'Sending...';
+        // Do not preventDefault or use AJAX here, let the browser submit it natively
+      });
+    }
   }
 
 });
