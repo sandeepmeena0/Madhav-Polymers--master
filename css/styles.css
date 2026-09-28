@@ -3717,9 +3717,14 @@ header.scrolled .nav-search-btn svg {
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   gap: 40px;
   justify-content: space-between;
   margin-bottom: 30px;
+}
+
+.footer-col {
+  flex: 1 1 250px;
 }
 
 .footer-col h3 {
