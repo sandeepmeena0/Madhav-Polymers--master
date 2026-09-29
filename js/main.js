@@ -7,30 +7,30 @@ window.mpMainLoaded = true;
 
 // --- Product page URL mapping for search routing by Name, Slug, Short Name & Product Code ---
 const PRODUCT_ROUTES = [
-  // 1. Hand Railing Rubber Gasket (MP-1607 to MP-1636, HR-, railing, handrail, balustrade)
+  // 1. Hand Railing Rubber Gasket (hand, rail, balus, hr, MP-1607..1636, 1607..1636)
   { 
     page: 'hand-railing-rubber-gasket.html', 
-    pattern: /hand-railing-rubber-gasket|\bhand\s*railing\b|\brailing\b|\bbalustrade\b|\bhandrail\b|\bglass\s*railing\b|\bhr-|\bmp-?16\d{2}\b|\b16(0[789]|1[02345678]|2[056]|36)\b/i 
+    pattern: /hand|rail|balus|glass\s*rail|\bhr\b|\bmp-?16|160[789]|161[02345678]|162[056]|1636/i 
   },
-  // 2. Kitchen & Wardrobe Profiles (MP-1502 to MP-1543, P1518, P1519, KW-, kitchen, wardrobe, cabinet)
+  // 2. Kitchen & Wardrobe Profiles (kitch, ward, cabin, drawer, cupb, prof, kw, MP-1502..1543, 1502..1543)
   { 
     page: 'kitchen-and-wardrobe-profiles-rubber-gasket.html', 
-    pattern: /kitchen-and-wardrobe-profiles-rubber-gasket|\bkitchen\b|\bwardrobe\b|\bcabinet\b|\bdrawer\b|\bcupboard\b|\bkw-|\bmp-?15\d{2}\b|\bp-?15\d{2}\b|\b15(0[236]|1[01489]|43)\b/i 
+    pattern: /kitch|ward|cabin|drawer|cupb|prof|\bkw\b|\bmp-?15|p-?15|150[236]|151[01489]|1543/i 
   },
-  // 3. Office Partition System (MP-106, MP-107, MP-126, MP-127, MP-1033, MP-1046, MP-2004 to MP-2040, OP-, partition, acoustic)
+  // 3. Office Partition System (off, part, acoust, cubic, op, MP-2004..2040, 2004..2040, 1033, 1046)
   { 
     page: 'office-partition-system-rubber-gasket.html', 
-    pattern: /office-partition-system-rubber-gasket|\boffice\s*partition\b|\bpartition\b|\bacoustic\b|\bcubicle\b|\bcabin\b|\bop-|\bmp-?20\d{2}\b|\bmp-?10(33|46)\b|\b20(0[459]|10|2[03456]|34|40)\b|\b10(33|46)\b/i 
+    pattern: /\boff|part|acoust|cubic|\bop\b|\bmp-?20|200[459]|2010|202[03456]|2034|2040|1033|1046/i 
   },
-  // 4. uPVC Window Rubber Gasket (SS-178 to SS-258, upvc, u-pvc, k type, universal)
+  // 4. uPVC Window Rubber Gasket (upv, upvc, pvc, u-pvc, k-type, casem, univ, SS-178..258, 178..258)
   { 
     page: 'upvc-window-rubber-gasket.html', 
-    pattern: /upvc-window-rubber-gasket|\bupvc\b|\bu-pvc\b|\bk[\s-]*type\b|\buniversal\b|\bss-?(178|188|198|199|221|222|228|229|230|231|233|234|237|238|241|242|243|257|258)\b|\b(178|188|198|199|221|222|228|229|230|231|233|234|237|238|241|242|243|257|258)\b/i 
+    pattern: /upv|u-pvc|\bpvc\b|k[\s-]*type|casem|univ|ss-?(178|188|198|199|221|222|228|229|230|231|233|234|237|238|241|242|243|257|258)|\b(178|188|198|199|221|222|228|229|230|231|233|234|237|238|241|242|243|257|258)\b/i 
   },
-  // 5. Aluminum Window Rubber Gasket (SS-100 to SS-142, aluminum, aluminium, al window, bubble seal)
+  // 5. Aluminum Window Rubber Gasket (al, alu, alum, alumi, aluminum, aluminium, SS-100..142, 100..142)
   { 
     page: 'aluminum-window-rubber-gasket.html', 
-    pattern: /aluminum-window-rubber-gasket|\baluminum\b|\baluminium\b|\balu\b|\balum\b|\bal\s*window\b|\bss-?(10[0-79]|12[0-367]|14[012](-5)?)\b|\b(10[0-79]|12[0-367]|14[012])\b/i 
+    pattern: /alum|alumi|al\s*wind|\balu\b|\bal\b|ss-?(10[0-79]|12[0-367]|14[012](-5)?)|\b(10[0-79]|12[0-367]|14[012])\b/i 
   },
   // Fallbacks
   { page: 'upvc-window-rubber-gasket.html', pattern: /\bss-/i },
@@ -205,6 +205,13 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     });
 
+    // Helper: Check if query is a broad category term rather than a specific item code/name
+    const isCategoryOnly = (q) => {
+      const norm = q.toLowerCase().replace(/[-_]/g, ' ').trim();
+      const catRegex = /^(hand\s*railing|handrail|railing|rail|hand|balustrade|glass\s*railing|hr|kitchen\s*and\s*wardrobe|kitchen\s*&?\s*wardrobe|kitchen|wardrobe|profiles?|cabinet|drawer|cupboard|kw|office\s*partition|office|partition|acoustic|cubicle|op|upvc\s*window|upvc|u\s*pvc|pvc|aluminum\s*window|aluminium\s*window|aluminum|aluminium|alu|alum|al\s*window|al|rubber\s*gasket|gasket|rubber|all|products?)$/i;
+      return catRegex.test(norm);
+    };
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const rawQuery = input.value.trim();
@@ -213,21 +220,34 @@ document.addEventListener('DOMContentLoaded', async function () {
       // Route to the best-matching product page
       const matched = PRODUCT_ROUTES.find(r => r.pattern.test(rawQuery));
       const target  = matched ? matched.page : 'products.html';
-
-      // If already on that target page — filter in-place and scroll
       const current = window.location.pathname.split('/').pop() || 'index.html';
+
+      const isCategory = isCategoryOnly(rawQuery);
+
+      // If already on that target page
       if (current === target) {
         const catalogInput = document.querySelector('.catalog-search-input, #catalogSearchInput');
         const productGrid  = document.querySelector('.product-grid');
         if (catalogInput && productGrid) {
-          catalogInput.value = rawQuery;
-          catalogInput.dispatchEvent(new Event('input'));
+          if (isCategory) {
+            catalogInput.value = '';
+            catalogInput.dispatchEvent(new Event('input'));
+          } else {
+            catalogInput.value = rawQuery;
+            catalogInput.dispatchEvent(new Event('input'));
+          }
           productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
           return;
         }
       }
 
-      window.location.href = `${target}?q=${encodeURIComponent(rawQuery)}`;
+      // If broad category search -> open clean category page with all products
+      if (isCategory) {
+        window.location.href = target;
+      } else {
+        // Specific product code or item search -> pass ?q=
+        window.location.href = `${target}?q=${encodeURIComponent(rawQuery)}`;
+      }
     });
   }
 
@@ -243,14 +263,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     const clearBtn        = document.getElementById('catalogSearchClear');
     const productGrid     = document.querySelector('.product-grid');
 
-    // Generic category terms — if queried, should show all cards
-    const categoryTerms = [
-      'hand-railing-rubber-gasket', 'kitchen-and-wardrobe-profiles-rubber-gasket',
-      'office-partition-system-rubber-gasket', 'upvc-window-rubber-gasket',
-      'aluminum-window-rubber-gasket', 'hand railing', 'hand-railing', 'railing',
-      'kitchen & wardrobe', 'kitchen', 'wardrobe', 'office partition', 'partition',
-      'upvc', 'u-pvc', 'aluminum', 'aluminium', 'rubber gasket', 'gasket', 'rubber', 'all'
-    ];
+    const isCategoryOnly = (q) => {
+      const norm = q.toLowerCase().replace(/[-_]/g, ' ').trim();
+      const catRegex = /^(hand\s*railing|handrail|railing|rail|hand|balustrade|glass\s*railing|hr|kitchen\s*and\s*wardrobe|kitchen\s*&?\s*wardrobe|kitchen|wardrobe|profiles?|cabinet|drawer|cupboard|kw|office\s*partition|office|partition|acoustic|cubicle|op|upvc\s*window|upvc|u\s*pvc|pvc|aluminum\s*window|aluminium\s*window|aluminum|aluminium|alu|alum|al\s*window|al|rubber\s*gasket|gasket|rubber|all|products?)$/i;
+      return catRegex.test(norm);
+    };
 
     // Pre-compute search data per card
     const cardData = productCards.map(card => {
@@ -277,7 +294,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       const qNumbers  = q.replace(/[^0-9]/g, '');
 
       // Check if search query is a general category term
-      const isGeneralCategory = categoryTerms.some(t => t === q || t === raw);
+      const isGeneralCategory = isCategoryOnly(raw);
 
       const terms = q.split(' ').filter(Boolean);
       let visibleCount = 0;
@@ -325,15 +342,16 @@ document.addEventListener('DOMContentLoaded', async function () {
       });
     }
 
-    // Read ?q= from URL and auto-search
+    // Read ?q= from URL and auto-search (only if it's a specific product code/item, not a category name)
     const qParam = new URLSearchParams(window.location.search).get('q') || new URLSearchParams(window.location.search).get('search');
-    if (qParam) {
+    if (qParam && !isCategoryOnly(qParam)) {
       searchInputs.forEach(i => i.value = qParam);
       performSearch(qParam);
       if (productGrid) {
         setTimeout(() => productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
       }
     } else {
+      searchInputs.forEach(i => i.value = '');
       performSearch('');
     }
   }
