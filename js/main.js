@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         input.focus();
         return;
       }
-      window.location.href = `products.html?q=${encodeURIComponent(query)}`;
+      window.location.href = `search.html?q=${encodeURIComponent(query)}`;
     };
   }
 
@@ -420,34 +420,34 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   // --- Quote Modal Logic ---
   function initQuoteModal() {
-    const quoteModal = document.getElementById('quoteModal');
-    const closeBtn = document.getElementById('closeQuoteModal');
-    const quoteForm = document.getElementById('quoteForm');
-
-    if (!quoteModal) {
-      console.warn('Quote modal not found in DOM.');
-      return;
-    }
-
     function closeModal() {
-      quoteModal.classList.remove('active');
-      document.body.style.overflow = '';
+      const quoteModal = document.getElementById('quoteModal');
+      if (quoteModal) {
+        quoteModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     }
 
-    // Event Delegation for all "Get Quote" buttons on product cards
+    // Event Delegation for all "Get Quote" buttons across all pages & dynamically loaded cards
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.btn-quote');
       if (btn) {
         e.preventDefault();
         
+        const quoteModal = document.getElementById('quoteModal');
+        if (!quoteModal) return;
+
         // Find product details
         const productCard = btn.closest('.product-item-card, .product-card');
-        if (productCard) {
-          const title = productCard.querySelector('.item-title, h3')?.textContent.trim() || '';
-          const code = productCard.querySelector('.item-code-badge')?.textContent.trim() || '';
-          
-          const quoteProductInput = document.getElementById('quoteProduct');
-          if (quoteProductInput) {
+        const customProduct = btn.getAttribute('data-product');
+        const quoteProductInput = document.getElementById('quoteProduct');
+
+        if (quoteProductInput) {
+          if (customProduct) {
+            quoteProductInput.value = customProduct;
+          } else if (productCard) {
+            const title = productCard.querySelector('.item-title, h3')?.textContent.trim() || '';
+            const code = productCard.querySelector('.item-code-badge')?.textContent.trim() || '';
             quoteProductInput.value = title + (code ? ` - ${code}` : '');
           }
         }
@@ -455,26 +455,20 @@ document.addEventListener('DOMContentLoaded', async function () {
         quoteModal.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
       }
-    });
-    
-    if (closeBtn) {
-      closeBtn.addEventListener('click', closeModal);
-    }
 
-    quoteModal.addEventListener('click', (e) => {
-      if (e.target === quoteModal) {
+      // Close modal on X button or overlay click
+      if (e.target.closest('#closeQuoteModal') || e.target.id === 'quoteModal') {
         closeModal();
       }
     });
 
-    if (quoteForm) {
-      // Allow standard form submission so FormSubmit.co can show the Activation page
-      quoteForm.addEventListener('submit', () => {
-        const submitBtn = quoteForm.querySelector('button[type="submit"]');
-        submitBtn.textContent = 'Sending...';
-        // Do not preventDefault or use AJAX here, let the browser submit it natively
-      });
-    }
+    // Form submit state
+    document.addEventListener('submit', (e) => {
+      if (e.target && e.target.id === 'quoteForm') {
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.textContent = 'Sending...';
+      }
+    });
   }
 
 });
