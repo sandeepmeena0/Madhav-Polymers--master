@@ -140,15 +140,19 @@ h3 {
 
 header {
   position: fixed;
-  /* Fixed to top of viewport */
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
   background: transparent;
-  /* Completely transparent initially */
   border-bottom: 1px solid transparent;
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Prevent flicker/blink on tab switch */
+  will-change: background-color, box-shadow;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* Text colors when transparent (Hero section background behind header) */
@@ -2461,91 +2465,108 @@ footer ul li a:hover {
   align-items: center;
 }
 
-.nav-search-form {
+/* Default state: transparent header (dark background) */
+.nav-search {
   position: relative;
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 50px;
-  padding: 4px 6px 4px 16px;
+  padding: 4px 6px 4px 14px;
+  width: 185px;
   transition: all 0.3s ease;
-  width: 160px;
 }
 
-.nav-search-input {
+.nav-search__input {
   border: none;
   background: transparent;
   outline: none;
   font-size: 0.88rem;
   color: #ffffff;
   width: 100%;
+  transition: color 0.3s ease;
 }
 
-.nav-search-input::placeholder {
-  color: rgba(255, 255, 255, 0.75);
+.nav-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.3s ease;
 }
 
-.nav-search-btn {
+.nav-search__icon-btn {
   background: #ffffff;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
+  color: #0b2258;
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.nav-search-btn svg {
-  width: 16px;
-  height: 16px;
-  fill: #0b2258;
-}
-
-.nav-search-btn:hover {
-  transform: scale(1.05);
+.nav-search__icon-btn:hover {
+  transform: scale(1.07);
   background-color: var(--cream-50, #f8fafc);
 }
 
-/* Focused State */
-.nav-search-form:focus-within {
-  background: rgba(255, 255, 255, 0.3);
+.nav-search:focus-within {
+  background: rgba(255, 255, 255, 0.28);
   border-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18);
 }
 
-/* ---------- Scrolled Header State Adapters ---------- */
-header.scrolled .nav-search-form {
+/* Scrolled header: white background → dark search */
+header.scrolled .nav-search {
   background: #f1f5f9;
   border-color: #cbd5e1;
 }
 
-header.scrolled .nav-search-input {
+header.scrolled .nav-search__input {
   color: var(--navy-900, #0b2258);
 }
 
-header.scrolled .nav-search-input::placeholder {
+header.scrolled .nav-search__input::placeholder {
   color: #64748b;
 }
 
-header.scrolled .nav-search-btn {
+header.scrolled .nav-search__icon-btn {
   background: var(--navy-900, #0b2258);
+  color: #ffffff;
 }
 
-header.scrolled .nav-search-btn svg {
-  fill: #ffffff;
+header.scrolled .nav-search:focus-within {
+  border-color: var(--navy-900, #0b2258);
+  box-shadow: 0 0 0 3px rgba(11, 34, 88, 0.12);
 }
 
-/* Mobile Responsive */
-@media (max-width: 680px) {
-  .nav-search-form {
-    width: 160px;
-    padding: 3px 4px 3px 12px;
+/* Mobile: icon-only, expands on open */
+@media (max-width: 991px) {
+  .nav-search {
+    width: 36px;
+    overflow: hidden;
+    padding: 4px;
+    justify-content: center;
   }
+  .nav-search__input {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+  .nav-search.search-open {
+    width: 170px;
+    padding: 4px 6px 4px 14px;
+  }
+  .nav-search.search-open .nav-search__input {
+    width: 100%;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
 
   .mp-about-section.mp-active .mp-animate-left,
   .mp-about-section.mp-active .mp-animate-right {
