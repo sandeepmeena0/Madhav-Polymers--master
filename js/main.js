@@ -5,16 +5,39 @@
 
 window.mpMainLoaded = true;
 
-// --- Product page URL mapping for search routing ---
+// --- Product page URL mapping for search routing by Name, Slug, Short Name & Product Code ---
 const PRODUCT_ROUTES = [
-  { page: 'upvc-window-rubber-gasket.html',                    pattern: /ss-|\bupvc\b|\bk.type\b|\bbubble\b|\bcasement\b|\buniversal\b/i },
-  { page: 'hand-railing-rubber-gasket.html',                   pattern: /\brailing\b|\bbalustrade\b|\bhand railing\b/i },
-  { page: 'kitchen-and-wardrobe-profiles-rubber-gasket.html',  pattern: /\bkitchen\b|\bwardrobe\b|\bcabinet\b/i },
-  { page: 'office-partition-system-rubber-gasket.html',        pattern: /\bpartition\b|\boffice\b|\bacoustic\b/i },
-  { page: 'aluminum-window-rubber-gasket.html',                pattern: /mp-|\baluminum\b|\baluminium\b/i },
-  { page: 'hand-railing-rubber-gasket.html',                   pattern: /^hr-/i },
-  { page: 'kitchen-and-wardrobe-profiles-rubber-gasket.html',  pattern: /^kw-/i },
-  { page: 'office-partition-system-rubber-gasket.html',        pattern: /^op-/i },
+  // 1. Hand Railing Rubber Gasket (MP-1607 to MP-1636, HR-, railing, handrail, balustrade)
+  { 
+    page: 'hand-railing-rubber-gasket.html', 
+    pattern: /hand-railing-rubber-gasket|\bhand\s*railing\b|\brailing\b|\bbalustrade\b|\bhandrail\b|\bglass\s*railing\b|\bhr-|\bmp-?16\d{2}\b|\b16(0[789]|1[02345678]|2[056]|36)\b/i 
+  },
+  // 2. Kitchen & Wardrobe Profiles (MP-1502 to MP-1543, P1518, P1519, KW-, kitchen, wardrobe, cabinet)
+  { 
+    page: 'kitchen-and-wardrobe-profiles-rubber-gasket.html', 
+    pattern: /kitchen-and-wardrobe-profiles-rubber-gasket|\bkitchen\b|\bwardrobe\b|\bcabinet\b|\bdrawer\b|\bcupboard\b|\bkw-|\bmp-?15\d{2}\b|\bp-?15\d{2}\b|\b15(0[236]|1[01489]|43)\b/i 
+  },
+  // 3. Office Partition System (MP-106, MP-107, MP-126, MP-127, MP-1033, MP-1046, MP-2004 to MP-2040, OP-, partition, acoustic)
+  { 
+    page: 'office-partition-system-rubber-gasket.html', 
+    pattern: /office-partition-system-rubber-gasket|\boffice\s*partition\b|\bpartition\b|\bacoustic\b|\bcubicle\b|\bcabin\b|\bop-|\bmp-?20\d{2}\b|\bmp-?10(33|46)\b|\b20(0[459]|10|2[03456]|34|40)\b|\b10(33|46)\b/i 
+  },
+  // 4. uPVC Window Rubber Gasket (SS-178 to SS-258, upvc, u-pvc, k type, universal)
+  { 
+    page: 'upvc-window-rubber-gasket.html', 
+    pattern: /upvc-window-rubber-gasket|\bupvc\b|\bu-pvc\b|\bk[\s-]*type\b|\buniversal\b|\bss-?(178|188|198|199|221|222|228|229|230|231|233|234|237|238|241|242|243|257|258)\b|\b(178|188|198|199|221|222|228|229|230|231|233|234|237|238|241|242|243|257|258)\b/i 
+  },
+  // 5. Aluminum Window Rubber Gasket (SS-100 to SS-142, aluminum, aluminium, al window, bubble seal)
+  { 
+    page: 'aluminum-window-rubber-gasket.html', 
+    pattern: /aluminum-window-rubber-gasket|\baluminum\b|\baluminium\b|\balu\b|\balum\b|\bal\s*window\b|\bss-?(10[0-79]|12[0-367]|14[012](-5)?)\b|\b(10[0-79]|12[0-367]|14[012])\b/i 
+  },
+  // Fallbacks
+  { page: 'upvc-window-rubber-gasket.html', pattern: /\bss-/i },
+  { page: 'hand-railing-rubber-gasket.html', pattern: /\bhr-/i },
+  { page: 'kitchen-and-wardrobe-profiles-rubber-gasket.html', pattern: /\bkw-/i },
+  { page: 'office-partition-system-rubber-gasket.html', pattern: /\bop-/i },
+  { page: 'aluminum-window-rubber-gasket.html', pattern: /\bmp-/i }
 ];
 
 // --- 1. WhatsApp Inquiry Form Submission (used by custom-solution page) ---
@@ -148,15 +171,15 @@ document.addEventListener('DOMContentLoaded', async function () {
       });
     }
 
-    // Rotating placeholder hints — shows user what they can search
+    // Rotating placeholder hints
     const hints = [
       'Search "UPVC Gasket"...',
       'Search "Hand Railing"...',
       'Search "Kitchen Profile"...',
-      'Search "Aluminium Section"...',
       'Search "Office Partition"...',
-      'Search "SS-178"...',
-      'Search product code e.g. MP-1607...',
+      'Search "Aluminum Window"...',
+      'Search "SS-178" or "178"...',
+      'Search "MP-1607" or "1607"...',
     ];
     let hintIndex = 0;
     let hintTimer;
@@ -184,23 +207,27 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const query = input.value.trim();
-      if (!query) { input.focus(); return; }
-
-      // If already on a product page — filter in-place and scroll
-      const catalogInput = document.querySelector('.catalog-search-input');
-      const productGrid  = document.querySelector('.product-grid');
-      if (catalogInput && productGrid) {
-        catalogInput.value = query;
-        catalogInput.dispatchEvent(new Event('input'));
-        productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
+      const rawQuery = input.value.trim();
+      if (!rawQuery) { input.focus(); return; }
 
       // Route to the best-matching product page
-      const matched = PRODUCT_ROUTES.find(r => r.pattern.test(query));
+      const matched = PRODUCT_ROUTES.find(r => r.pattern.test(rawQuery));
       const target  = matched ? matched.page : 'products.html';
-      window.location.href = `${target}?q=${encodeURIComponent(query)}`;
+
+      // If already on that target page — filter in-place and scroll
+      const current = window.location.pathname.split('/').pop() || 'index.html';
+      if (current === target) {
+        const catalogInput = document.querySelector('.catalog-search-input, #catalogSearchInput');
+        const productGrid  = document.querySelector('.product-grid');
+        if (catalogInput && productGrid) {
+          catalogInput.value = rawQuery;
+          catalogInput.dispatchEvent(new Event('input'));
+          productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+      }
+
+      window.location.href = `${target}?q=${encodeURIComponent(rawQuery)}`;
     });
   }
 
@@ -216,7 +243,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     const clearBtn        = document.getElementById('catalogSearchClear');
     const productGrid     = document.querySelector('.product-grid');
 
-    // Pre-compute search text per card — normalize whitespace to catch all text
+    // Generic category terms — if queried, should show all cards
+    const categoryTerms = [
+      'hand-railing-rubber-gasket', 'kitchen-and-wardrobe-profiles-rubber-gasket',
+      'office-partition-system-rubber-gasket', 'upvc-window-rubber-gasket',
+      'aluminum-window-rubber-gasket', 'hand railing', 'hand-railing', 'railing',
+      'kitchen & wardrobe', 'kitchen', 'wardrobe', 'office partition', 'partition',
+      'upvc', 'u-pvc', 'aluminum', 'aluminium', 'rubber gasket', 'gasket', 'rubber', 'all'
+    ];
+
+    // Pre-compute search data per card
     const cardData = productCards.map(card => {
       const title    = (card.querySelector('.item-title, h3')?.textContent || '').replace(/\s+/g, ' ').trim();
       const code     = (card.querySelector('.item-code-badge')?.textContent || '').replace(/\s+/g, ' ').trim();
@@ -225,24 +261,38 @@ document.addEventListener('DOMContentLoaded', async function () {
       const imgAlt   = (card.querySelector('img')?.getAttribute('alt') || '').trim();
       const fullText = (card.textContent || '').replace(/\s+/g, ' ').trim();
 
-      // Also add version without hyphens so "ss178" matches "SS-178"
+      // Variations: SS-178 -> ss178 and 178; MP-1607 -> mp1607 and 1607
       const codeNoHyphen = code.replace(/-/g, '');
-      const combined = `${title} ${code} ${codeNoHyphen} ${specs} ${dsearch} ${imgAlt} ${fullText}`.toLowerCase();
+      const codeNumbers  = code.replace(/[^0-9]/g, '');
 
-      return { el: card, text: combined };
+      const combined = `${title} ${code} ${codeNoHyphen} ${codeNumbers} ${specs} ${dsearch} ${imgAlt} ${fullText}`.toLowerCase();
+
+      return { el: card, text: combined, code: code.toLowerCase(), title: title.toLowerCase() };
     });
 
     function performSearch(query) {
-      // Strip extra spaces, also try matching without hyphens
-      const q = query.toLowerCase().trim().replace(/\s+/g, ' ');
+      const raw = query.toLowerCase().trim();
+      const q = raw.replace(/\s+/g, ' ');
       const qNoHyphen = q.replace(/-/g, '');
+      const qNumbers  = q.replace(/[^0-9]/g, '');
+
+      // Check if search query is a general category term
+      const isGeneralCategory = categoryTerms.some(t => t === q || t === raw);
+
       const terms = q.split(' ').filter(Boolean);
       let visibleCount = 0;
 
-      cardData.forEach(({ el, text }) => {
-        const matches = terms.length === 0 ||
-          terms.every(t => text.includes(t)) ||
-          (qNoHyphen.length > 1 && text.includes(qNoHyphen));
+      cardData.forEach(({ el, text, code, title }) => {
+        let matches = false;
+
+        if (!raw || isGeneralCategory) {
+          matches = true;
+        } else {
+          matches = terms.every(t => text.includes(t)) ||
+                    (qNoHyphen.length > 1 && text.includes(qNoHyphen)) ||
+                    (qNumbers.length >= 2 && text.includes(qNumbers));
+        }
+
         el.style.display = matches ? '' : 'none';
         if (matches) visibleCount++;
       });
@@ -253,10 +303,10 @@ document.addEventListener('DOMContentLoaded', async function () {
           : `${visibleCount} Product${visibleCount === 1 ? '' : 's'} Found`;
       });
 
-      if (clearBtn) clearBtn.hidden = (q.length === 0);
+      if (clearBtn) clearBtn.hidden = (raw.length === 0);
 
       if (noResultsMsg) {
-        const show = visibleCount === 0 && q.length > 0;
+        const show = visibleCount === 0 && raw.length > 0;
         noResultsMsg.hidden = !show;
         if (show && noResultsTerm) noResultsTerm.textContent = query.trim();
       }
@@ -366,7 +416,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     resetTimer();
   }
 
-  // --- K. Quote Modal ---
+  // --- K. Quote Modal & WhatsApp Product Inquiries ---
   function initQuoteModal() {
     function closeModal() {
       const modal = document.getElementById('quoteModal');
@@ -374,23 +424,23 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     document.addEventListener('click', (e) => {
-      // Open modal on Get Quote button
-      const btn = e.target.closest('.btn-quote');
-      if (btn) {
+      // 1. Open Quote Modal on "Get Quote" button
+      const quoteBtn = e.target.closest('.btn-quote');
+      if (quoteBtn) {
         e.preventDefault();
         const modal = document.getElementById('quoteModal');
         if (!modal) return;
 
         const productInput = document.getElementById('quoteProduct');
         if (productInput) {
-          const customProduct = btn.getAttribute('data-product');
+          const customProduct = quoteBtn.getAttribute('data-product');
           if (customProduct) {
             productInput.value = customProduct;
           } else {
-            const card  = btn.closest('.product-item-card, .product-card');
-            const title = card?.querySelector('.item-title, h3')?.textContent.trim() || '';
-            const code  = card?.querySelector('.item-code-badge')?.textContent.trim() || '';
-            productInput.value = title + (code ? ` - ${code}` : '');
+            const card  = quoteBtn.closest('.product-item-card, .product-card');
+            const title = (card?.querySelector('.item-title, h3')?.textContent || '').replace(/\s+/g, ' ').trim();
+            const code  = (card?.querySelector('.item-code-badge')?.textContent || '').replace(/\s+/g, ' ').trim();
+            productInput.value = title + (code ? ` (${code})` : '');
           }
         }
 
@@ -399,7 +449,24 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
       }
 
-      // Close modal
+      // 2. Direct WhatsApp Click from Product Card
+      const waBtn = e.target.closest('.btn-whatsapp, a[href*="wa.me"]');
+      if (waBtn) {
+        const card = waBtn.closest('.product-item-card, .product-card');
+        if (card) {
+          e.preventDefault();
+          const title = (card.querySelector('.item-title, h3')?.textContent || '').replace(/\s+/g, ' ').trim();
+          const code  = (card.querySelector('.item-code-badge')?.textContent || '').replace(/\s+/g, ' ').trim();
+          const productLabel = title + (code ? ` (Code: ${code})` : '');
+          const msg = encodeURIComponent(
+            `Hello Madhav Polymers, I am interested in *${productLabel}*.\nPlease share the price quotation, MOQ, and technical catalog.`
+          );
+          window.open(`https://wa.me/919355761001?text=${msg}`, '_blank');
+          return;
+        }
+      }
+
+      // 3. Close modal
       if (e.target.closest('#closeQuoteModal') || e.target.id === 'quoteModal') closeModal();
     });
 
