@@ -2568,18 +2568,6 @@ header.scrolled .nav-search:focus-within {
   }
 }
 
-  .mp-about-section.mp-active .mp-animate-left,
-  .mp-about-section.mp-active .mp-animate-right {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .mp-about-image-wrapper img {
-    min-height: 240px;
-    max-height: 320px;
-  }
-}
-
 
 
 
