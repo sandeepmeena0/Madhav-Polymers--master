@@ -56,7 +56,19 @@ nav.main-nav a {
   display: none; flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 4px;
 }
-.menu-toggle span { display: block; width: 22px; height: 2px; border-radius: 2px; }
+/* 1024px / Small Desktop / Tablet Landscape */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .nav-wrap { padding: 0.75rem 1rem; gap: 0.8rem; }
+  .brand { gap: 0.5rem; flex-shrink: 0; }
+  .brand img { height: 44px; }
+  .brand-text .name { font-size: 1.15rem; }
+  .brand-text .tag { font-size: 0.56rem; letter-spacing: 0.08em; }
+  nav.main-nav > ul { gap: 0.75rem; }
+  nav.main-nav a { font-size: 0.84rem; padding: 0.3rem 0; }
+  .nav-search { width: 140px; padding: 3px 6px 3px 10px; }
+  .nav-search__input { font-size: 0.8rem; }
+  .nav-cta { flex-shrink: 0; }
+}
 
 @media (max-width: 991px) {
   nav.main-nav > ul { display: none; }
@@ -212,14 +224,23 @@ nav.main-nav a {
     const recipientEmail = "info@madhavpolymers.in";
 
     function getFormData() {
-      if (!form.checkValidity()) {
-        form.reportValidity();
+      const nameEl = document.getElementById('name');
+      const emailEl = document.getElementById('email');
+      
+      if (!nameEl.value.trim()) {
+        nameEl.focus();
+        nameEl.reportValidity();
+        return null;
+      }
+      if (!emailEl.value.trim() || !emailEl.checkValidity()) {
+        emailEl.focus();
+        emailEl.reportValidity();
         return null;
       }
       return {
-        name: document.getElementById('name').value.trim(),
+        name: nameEl.value.trim(),
         phone: document.getElementById('phone').value.trim() || 'Not provided',
-        email: document.getElementById('email').value.trim(),
+        email: emailEl.value.trim(),
         product: document.getElementById('product').value || 'Not specified',
         details: document.getElementById('message').value.trim() || 'No additional details'
       };
@@ -242,7 +263,7 @@ nav.main-nav a {
       window.open(whatsappUrl, '_blank');
     });
 
-    // Email Action (Direct client mailto link)
+    // Email Action (Direct Gmail Web Compose on desktop & mailto on mobile)
     document.getElementById('btnEmail').addEventListener('click', function () {
       const data = getFormData();
       if (!data) return;
@@ -256,8 +277,19 @@ nav.main-nav a {
         `Product of Interest: ${data.product}\n\n` +
         `Project Details:\n${data.details}`;
 
-      const mailtoUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoUrl;
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (isMobile) {
+        // Mobile device: opens native Gmail / Apple Mail app
+        window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      } else {
+        // Desktop browser: opens Gmail Web Compose directly with pre-filled details
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipientEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const win = window.open(gmailUrl, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+      }
     });
   </script>
   <script src="js/main.js"></script>
