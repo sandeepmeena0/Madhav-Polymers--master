@@ -3931,3 +3931,52 @@ header.scrolled .nav-search:focus-within {
 .quote-submit-btn:hover {
   background: var(--navy-700);
 }
+
+/* Quote Modal Thank You / Success State */
+.quote-success-state {
+  text-align: center;
+  padding: 15px 10px 5px;
+  animation: modalPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.quote-success-icon {
+  width: 64px;
+  height: 64px;
+  background: #ecfdf5;
+  border: 2px solid #a7f3d0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.quote-success-state h2 {
+  font-family: var(--serif);
+  color: var(--navy-900);
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+
+.quote-success-state p {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+
+.quote-success-state strong {
+  color: var(--navy-900);
+  font-weight: 600;
+}

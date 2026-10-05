@@ -40,7 +40,7 @@ const PRODUCT_ROUTES = [
   { page: 'aluminum-window-rubber-gasket.html', pattern: /\bmp-/i }
 ];
 
-// --- 1. WhatsApp Inquiry Form Submission (used by custom-solution page) ---
+// --- 1. WhatsApp Inquiry Form Submission (used by home page contact form) ---
 function handleFormSubmit(event) {
   event.preventDefault();
   const whatsappNumber = '919355761001';
@@ -50,14 +50,56 @@ function handleFormSubmit(event) {
   const phone   = get('mpPhone') || 'Not provided';
   const details = get('mpDetails');
 
+  const submitBtn = event.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn ? submitBtn.textContent : 'SEND INQUIRY';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'OPENING WHATSAPP...';
+  }
+
   const msg = encodeURIComponent(
     `*New Project Inquiry*\n\n*Name:* ${name}\n*Email:* ${email}\n*Phone:* ${phone}\n*Project Details:* ${details}`
   );
+  const waUrl = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
+  // 1. Also asynchronously send lead to email in background so the inquiry is never lost
+  try {
+    fetch('https://formsubmit.co/ajax/info@madhavpolymers.in', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: `New Project Inquiry from ${name}`,
+        Name: name,
+        Email: email,
+        Phone: phone,
+        Details: details
+      })
+    }).catch(() => {});
+  } catch (e) {}
+
+  // 2. Update status banner with realistic & helpful text
   const successAlert = document.getElementById('mpSuccessAlert');
-  if (successAlert) successAlert.style.display = 'block';
+  if (successAlert) {
+    successAlert.innerHTML = `
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;">
+        <div>
+          <strong style="display: block; margin-bottom: 2px;">Opening WhatsApp chat...</strong>
+          <span style="font-size: 0.88rem;">Please click <strong>Send</strong> in WhatsApp to complete your message. If it didn't open, <a href="${waUrl}" target="_blank" style="color: inherit; text-decoration: underline; font-weight: 600;">click here</a>.</span>
+        </div>
+        <button type="button" onclick="this.closest('.mp-alert-success').style.display='none'" style="background: none; border: none; font-size: 1.3rem; line-height: 1; cursor: pointer; color: inherit; padding: 0 4px;" aria-label="Close">&times;</button>
+      </div>
+    `;
+    successAlert.style.display = 'block';
+  }
 
-  setTimeout(() => window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, '_blank'), 400);
+  // 3. Open WhatsApp in new tab
+  setTimeout(() => {
+    window.open(waUrl, '_blank');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  }, 400);
 }
 
 
@@ -436,9 +478,27 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   // --- K. Quote Modal & WhatsApp Product Inquiries ---
   function initQuoteModal() {
+    function resetQuoteModal() {
+      const formWrapper  = document.getElementById('quoteFormWrapper');
+      const successState = document.getElementById('quoteSuccessState');
+      const form         = document.getElementById('quoteForm');
+      if (form) form.reset();
+      if (formWrapper) formWrapper.style.display = '';
+      if (successState) successState.style.display = 'none';
+      const submitBtn = document.querySelector('#quoteForm button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Inquiry';
+      }
+    }
+
     function closeModal() {
       const modal = document.getElementById('quoteModal');
-      if (modal) { modal.classList.remove('active'); document.body.style.overflow = ''; }
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(resetQuoteModal, 300);
+      }
     }
 
     document.addEventListener('click', (e) => {
@@ -448,6 +508,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         e.preventDefault();
         const modal = document.getElementById('quoteModal');
         if (!modal) return;
+
+        resetQuoteModal();
 
         const productInput = document.getElementById('quoteProduct');
         if (productInput) {
@@ -484,14 +546,51 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
       }
 
-      // 3. Close modal
-      if (e.target.closest('#closeQuoteModal') || e.target.id === 'quoteModal') closeModal();
+      // 3. Close modal buttons
+      if (e.target.closest('#closeQuoteModal') || e.target.closest('#closeSuccessQuoteBtn') || e.target.id === 'quoteModal') {
+        closeModal();
+      }
     });
 
-    document.addEventListener('submit', (e) => {
+    // 4. Handle Quote Form Submit via AJAX (no new page redirection)
+    document.addEventListener('submit', async (e) => {
       if (e.target?.id === 'quoteForm') {
-        const btn = e.target.querySelector('button[type="submit"]');
-        if (btn) btn.textContent = 'Sending...';
+        e.preventDefault();
+        const form = e.target;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending...';
+        }
+
+        const formData = new FormData(form);
+        const dataObj = {};
+        formData.forEach((val, key) => { dataObj[key] = val; });
+
+        const formWrapper  = document.getElementById('quoteFormWrapper');
+        const successState = document.getElementById('quoteSuccessState');
+        const productSpan  = document.getElementById('quoteSuccessProduct');
+
+        try {
+          // Asynchronously send to FormSubmit AJAX endpoint
+          await fetch('https://formsubmit.co/ajax/info@madhavpolymers.in', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(dataObj)
+          });
+        } catch (err) {
+          console.warn('FormSubmit AJAX notice:', err);
+        }
+
+        // Display Thank You message inside modal without redirection
+        if (productSpan) {
+          productSpan.textContent = dataObj.product || 'the product';
+        }
+        if (formWrapper) formWrapper.style.display = 'none';
+        if (successState) successState.style.display = 'block';
       }
     });
   }
