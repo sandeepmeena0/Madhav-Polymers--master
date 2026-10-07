@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340" width="100%" height="100%">
+  <defs>
+    <!-- Sunset / Instagram Conic & Linear Gradient ring -->
+    <linearGradient id="dkRingGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFB300" />
+      <stop offset="25%" stop-color="#FF5722" />
+      <stop offset="50%" stop-color="#E91E63" />
+      <stop offset="75%" stop-color="#9C27B0" />
+      <stop offset="100%" stop-color="#FF007F" />
+    </linearGradient>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Montserrat:wght@500;600&amp;display=swap');
+      .dk-gold { fill: #D6A838; }
+    </style>
+  </defs>
+
+  <!-- Outer Gradient Ring -->
+  <circle cx="170" cy="170" r="156" fill="none" stroke="url(#dkRingGrad)" stroke-width="9" />
+
+  <!-- Monogram DK -->
+  <g transform="translate(170, 125)">
+    <!-- Stylized D and K intertwined in luxury gold -->
+    <!-- D vertical stem & bowl -->
+    <path d="M-36,-48 L-14,-48 C6,-48 18,-36 18,-20 C18,-4 6,8 -14,8 L-36,8 Z M-22,-36 L-22,-4 L-12,-4 C-2,-4 4,-10 4,-20 C4,-30 -2,-36 -12,-36 Z" fill="#D6A838" />
+    <!-- K vertical stem, diagonal up, diagonal down -->
+    <path d="M-4,-48 L10,-48 L10,8 L-4,8 Z" fill="#D6A838" />
+    <path d="M8,-22 L34,-48 L50,-48 L22,-20 Z" fill="#D6A838" />
+    <path d="M16,-18 L48,8 L32,8 L4,-10 Z" fill="#D6A838" />
+  </g>
+
+  <!-- Typography: Design Kraft -->
+  <text x="170" y="222" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#D6A838" text-anchor="middle" letter-spacing="1">Design Kraft</text>
+  
+  <!-- Subtitle: INTERIOR DESIGN STUDIO -->
+  <text x="170" y="254" font-family="'Montserrat', sans-serif" font-size="12" font-weight="600" fill="#D6A838" text-anchor="middle" letter-spacing="4.5">INTERIOR DESIGN STUDIO</text>
+</svg>

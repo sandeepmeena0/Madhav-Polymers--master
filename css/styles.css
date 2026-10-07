@@ -1896,7 +1896,7 @@ footer ul li a:hover {
 .mp-ticker-track {
   display: flex;
   width: max-content;
-  animation: mp-infinite-scroll 22s linear infinite;
+  animation: mp-infinite-scroll 26s linear infinite;
   will-change: transform;
 }
 
@@ -1910,23 +1910,26 @@ footer ul li a:hover {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 70px;
-  padding-right: 70px;
+  gap: 60px;
+  padding-right: 60px;
   /* Padding matches gap exactly to prevent gaps/lags */
 }
 
 /* Logo Item Wrapper */
 .mp-ticker-logo-item {
-  height: 52px;
+  height: 60px;
+  min-width: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 10px;
 }
 
 .mp-ticker-logo {
-  height: 100%;
+  max-height: 48px;
+  max-width: 160px;
   width: auto;
-  max-width: 170px;
+  height: auto;
   object-fit: contain;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
@@ -1934,55 +1937,7 @@ footer ul li a:hover {
 
 /* Enlarge image on hover */
 .mp-ticker-logo:hover {
-  transform: scale(1.22);
-}
-
-/* Stylized Styled Brand Badges for local assets */
-.mp-brand-badge {
-  font-family: 'Arial Black', sans-serif;
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -0.5px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  user-select: none;
-}
-
-.mp-brand-badge:hover {
-  transform: scale(1.18);
-}
-
-.mp-badge-ozone {
-  color: #1e5a96;
-}
-
-.mp-badge-kubik {
-  color: #e20074;
-}
-
-.mp-badge-hafele {
-  color: #d71921;
-}
-
-.mp-badge-aluplast {
-  color: #ed1c24;
-}
-
-.mp-badge-alucoat {
-  color: #2c3e50;
-}
-
-.mp-badge-waw {
-  color: #8b8d7a;
-}
-
-.mp-badge-technal {
-  color: #000000;
+  transform: scale(1.12);
 }
 
 /* Keyframes for Continuous Linear Movement */
@@ -2003,16 +1958,19 @@ footer ul li a:hover {
   }
 
   .mp-ticker-slide-group {
-    gap: 45px;
-    padding-right: 45px;
+    gap: 36px;
+    padding-right: 36px;
   }
 
   .mp-ticker-logo-item {
-    height: 40px;
+    height: 44px;
+    min-width: 100px;
+    padding: 0 5px;
   }
 
-  .mp-brand-badge {
-    font-size: 18px;
+  .mp-ticker-logo {
+    max-height: 36px;
+    max-width: 120px;
   }
 }
 

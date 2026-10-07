@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 120" width="100%" height="100%">
+  <defs>
+    <!-- Metallic brushed silver gradient -->
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6A7584" />
+      <stop offset="30%" stop-color="#CBD4DC" />
+      <stop offset="55%" stop-color="#FFFFFF" />
+      <stop offset="70%" stop-color="#9BA7B4" />
+      <stop offset="100%" stop-color="#4B5462" />
+    </linearGradient>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&amp;display=swap');
+      .gl-text { fill: #2D3540; font-family: 'Montserrat', sans-serif; font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- Metallic Square Icon with Stylized 'G' -->
+  <g transform="translate(20, 18)">
+    <!-- Square Box with metallic gradient -->
+    <rect x="0" y="0" width="84" height="84" rx="4" fill="url(#metalGrad)" />
+    
+    <!-- Stylized 'G' Cutout in white/light center -->
+    <path d="M42,20 C30,20 22,29 22,42 C22,55 30,64 42,64 C53,64 61,56 61,45 L42,45 L42,37 L70,37 L70,47 C70,61 58,72 42,72 C24,72 13,60 13,42 C13,24 24,12 42,12 C54,12 63,17 68,25 L61,31 C57,24 50,20 42,20 Z" fill="#FFFFFF" opacity="0.95" />
+    
+    <!-- Top-Right accent notch / line in metal style -->
+    <line x1="74" y1="0" x2="74" y2="40" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- Typography: LAZIA (combined with G cube it forms GLAZIA) -->
+  <text x="120" y="78" class="gl-text" font-size="64" letter-spacing="4">LAZIA</text>
+</svg>

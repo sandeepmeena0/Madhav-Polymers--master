@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 220" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&amp;display=swap');
+      .okna-blue { fill: #1B458E; font-family: 'Montserrat', 'Arial Black', sans-serif; font-weight: 900; }
+    </style>
+  </defs>
+
+  <!-- Striped Sun Emblem -->
+  <g transform="translate(130, 60)">
+    <!-- 8 horizontal sliced bands forming a circular sun -->
+    <rect x="-24" y="-52" width="48" height="7.5" rx="3.75" fill="#EEB748" />
+    <rect x="-38" y="-40" width="76" height="7.5" rx="3.75" fill="#EEB748" />
+    <rect x="-48" y="-28" width="96" height="7.5" rx="3.75" fill="#EEB748" />
+    <rect x="-53" y="-16" width="106" height="7.5" rx="3.75" fill="#EEB748" />
+    <rect x="-53" y="-4" width="106" height="7.5" rx="3.75" fill="#EEB748" />
+    <rect x="-48" y="8" width="96" height="7.5" rx="3.75" fill="#EEB748" />
+    <rect x="-38" y="20" width="76" height="7.5" rx="3.75" fill="#EEB748" />
+    <rect x="-24" y="32" width="48" height="7.5" rx="3.75" fill="#EEB748" />
+  </g>
+
+  <!-- Typography: OKNA -->
+  <text x="130" y="185" class="okna-blue" font-size="64" letter-spacing="1" text-anchor="middle">OKNA</text>
+</svg>
